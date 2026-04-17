@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kene Ezeoke — Senior Program Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --ink-2: #3a3a3a;
+    --ink-3: #7a7a7a;
+    --paper: #f5f2ed;
+    --paper-2: #ede9e2;
+    --accent: #1a3a2a;
+    --accent-light: #2d5c42;
+    --gold: #b8934a;
+    --gold-light: #d4a96a;
+    --white: #ffffff;
+    --rule: rgba(14,14,14,0.12);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(245,242,237,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45vw;
+    height: 45vw;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32vw;
+    height: 32vw;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 500;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    color: var(--ink-2);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.3s forwards;
+  }
+
+  .hero-desc {
+    max-width: 540px;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.75rem;
+    border: 1px solid var(--ink);
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .btn-secondary:hover { background: var(--ink); color: var(--white); transform: translateY(-1px); }
+
+  /* STATS STRIP */
+  .stats-strip {
+    background: var(--accent);
+    padding: 2rem 3rem;
+  }
+
+  .stats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.1;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-top: 0.25rem;
+    display: block;
+  }
+
+  /* RESUME SECTION */
+  .resume-section {
+    padding: 5rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* RESUME PANEL */
+  .resume-panel { display: block; }
+
+  /* SUMMARY */
+  .resume-summary {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--ink-2);
+    max-width: 800px;
+    margin-bottom: 3.5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  /* JOB ENTRY */
+  .job {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .job:last-child { border-bottom: none; }
+
+  .job-meta { }
+
+  .job-company {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    line-height: 1.1;
+  }
+
+  .job-company a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--gold);
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .job-company a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .job-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+
+  .job-dates {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 0.3rem;
+  }
+
+  .job-location {
+    font-size: 12px;
+    color: var(--ink-3);
+    font-style: italic;
+  }
+
+  .job-content { }
+
+  .job-subtitle {
+    font-size: 13px;
+    color: var(--ink-3);
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .job-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .job-bullets li {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .job-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .highlight {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* TOOLS SECTION */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .tool-group { }
+
+  .tool-group-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .tool-group-items {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.9;
+  }
+
+  /* EDUCATION */
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .edu-school {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .edu-degree {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-top: 0.25rem;
+  }
+
+  .edu-location {
+    font-size: 12px;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--paper-2);
+    padding: 5rem 3rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-heading {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .contact-sub {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.8;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-field label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    padding: 0.75rem 1rem;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus {
+    border-color: var(--accent);
+  }
+
+  .form-field textarea { resize: vertical; min-height: 120px; }
+
+  .form-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .form-note {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  .form-success {
+    display: none;
+    background: var(--accent);
+    color: var(--white);
+    padding: 1rem 1.25rem;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .stats-strip { padding: 2rem 1.5rem; }
+    .resume-section { padding: 3rem 1.5rem; }
+    .job { grid-template-columns: 1fr; gap: 0.75rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    #contact { padding: 3rem 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .hero::before, .hero::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Kene Ezeoke</a>
+  <ul class="nav-links">
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="resume.pdf" download>Download PDF</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-tag">Seattle, WA</p>
+    <h1 class="hero-name">Kene Ezeoke</h1>
+    <p class="hero-title">Senior Program Manager &amp; Builder</p>
+    <p class="hero-desc">8+ years building programs from scratch at Amazon, Apple, Google, and F5. I thrive in ambiguous, high-growth environments where I can partner with leadership, stand up what doesn't exist yet, and drive measurable business outcomes.</p>
+    <div class="hero-actions">
+      <a href="#resume" class="btn-primary">View Resume &darr;</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+      <a href="resume.pdf" download class="btn-secondary">Download PDF &darr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat">
+      <span class="stat-num">8+</span>
+      <span class="stat-label">Years in Big Tech</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">$45MM</span>
+      <span class="stat-label">Revenue driven at F5</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">$500MM</span>
+      <span class="stat-label">Revenue managed at Apple</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">40% YoY</span>
+      <span class="stat-label">Revenue growth, Amazon Intl</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">50%</span>
+      <span class="stat-label">Faster launch cycles</span>
+    </div>
+  </div>
+</div>
+
+<!-- RESUME SECTION -->
+<section class="resume-section" id="resume">
+
+  <!-- RESUME -->
+  <div class="resume-panel active" id="panel-startup">
+
+    <p class="resume-summary fade-in">
+      Started as employee #13 at a NYC startup -- proved product viability, built the team from 1 to 6, and helped attract investment from Marc Benioff. Since then, 8+ years driving measurable outcomes at Amazon, Apple, Google, and F5, influencing decisions from frontline operations to S-team and board-level audiences. I bring a consistent pattern of identifying missing or broken processes and replacing them with scalable systems -- increasingly using GenAI and LLM-powered automation to do work that was previously impossible at scale. Chicago Booth MBA.
+    </p>
+
+    <p class="section-label">Experience</p>
+
+    <div class="job fade-in">
+      <div class="job-meta">
+        <p class="job-company"><a href="https://www.amazon.com" target="_blank" rel="noopener">Amazon</a></p>
+        <p class="job-title">Sr Program Manager</p>
+        <p class="job-dates">Jul 2024 &ndash; Present</p>
+        <p class="job-location">Seattle, WA</p>
+      </div>
+      <div class="job-content">
+        <p class="job-subtitle">Business performance and executive reporting for Add to Delivery | S-team, board, and VP-level visibility</p>
+        <ul class="job-bullets">
+          <li>Built the business performance metrics program from zero within the first week, standardizing reporting across 3 orgs and 4 partner teams and cutting BI data requests by <span class="highlight">50%</span>. Program insights have reached Amazon board meetings and earnings call callouts.</li>
+          <li>Authored executive-level performance narratives that directly drove product reprioritization, resulting in <span class="highlight">double-digit basis point improvements</span> across both cancellation and return rate metrics.</li>
+          <li>Designed and launched a GenAI-powered reporting automation system: wrote the business logic and context engineering framework enabling LLMs to interpret performance data, set the roadmap for data infrastructure, and delivered weekly automated dashboards now used across VP-level leadership. Built an AI output scorecard to track quality improvements week over week.</li>
+          <li>Stood up the Voice of Customer program from scratch, building feedback dashboards and using GenAI to analyze customer anecdotes at scale, surfacing recurring themes and pain points previously invisible in manual review.</li>
+          <li>Delivered first Customer Listening Session in <span class="highlight">2 weeks</span> (typical lead time: 60+ days) and unblocked stalled customer support content within 3 weeks. Both had been stuck for months.</li>
+          <li>Use AI daily across core workflows: analysis synthesis, stakeholder meeting preparation, executive communications, and rapid iteration on strategic documents.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job fade-in">
+      <div class="job-meta">
+        <p class="job-company"><a href="https://www.f5.com" target="_blank" rel="noopener">F5 Networks</a></p>
+        <p class="job-title">Senior Program Manager, Business Operations</p>
+        <p class="job-dates">Jan 2022 &ndash; Nov 2023</p>
+        <p class="job-location">Seattle, WA</p>
+      </div>
+      <div class="job-content">
+        <p class="job-subtitle">Right-hand program lead to Sr Director of Operations; PMO, product launches, and process transformation</p>
+        <ul class="job-bullets">
+          <li>Led company-wide PMO and PDLC overhaul, redesigning the stage-gate process governing launches across a 100+ person org spanning Product, Engineering, PMM, Support, Marketing, and SKU Management. Reduced cycle time by <span class="highlight">20%</span>. Gained buy-in from Product VPs and the CPO.</li>
+          <li>Led top-priority product launch through the new stage-gate process to ship <span class="highlight">50% faster than industry standard</span>, delivering <span class="highlight">$45MM in annual revenue</span> (+6% YoY).</li>
+          <li>Drove early phases of F5's first outsourced hardware manufacturing initiative, partnering with Flextronics and Dell. Owned partner identification, contract negotiation, and cross-functional coordination.</li>
+          <li>Reduced OEM and partner procurement approval cycle time by <span class="highlight">50%</span> by eliminating bottlenecks and building a repeatable workflow.</li>
+          <li>Overhauled the software beta program and grew participation <span class="highlight">10x</span> through new customer acquisition strategies and operational improvements.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job fade-in">
+      <div class="job-meta">
+        <p class="job-company"><a href="https://www.apple.com" target="_blank" rel="noopener">Apple</a></p>
+        <p class="job-title">Channel Partner Operations Manager</p>
+        <p class="job-dates">Jun 2021 &ndash; Jan 2022</p>
+        <p class="job-location">Austin, TX</p>
+      </div>
+      <div class="job-content">
+        <p class="job-subtitle">North America channel partner operations and supply chain</p>
+        <ul class="job-bullets">
+          <li>Managed <span class="highlight">$500MM</span> in North America revenue through operational planning, forecasting, and supply chain risk mitigation with zero inventory delays.</li>
+          <li>Recovered <span class="highlight">$10MM+</span> in perishable orders by building a first-of-its-kind internal backlog analysis tool for account management teams.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job fade-in">
+      <div class="job-meta">
+        <p class="job-company"><a href="https://www.google.com" target="_blank" rel="noopener">Google</a></p>
+        <p class="job-title">Product Operations Manager</p>
+        <p class="job-dates">Jun 2020 &ndash; Sep 2020</p>
+        <p class="job-location">Mountain View, CA</p>
+      </div>
+      <div class="job-content">
+        <p class="job-subtitle">Subscriber retention and CX team integration (MBA Intern)</p>
+        <ul class="job-bullets">
+          <li>Drove <span class="highlight">60% increase in subscriber engagement</span> by synthesizing VOC data to identify at-risk subscribers, then collaborating with marketing and support to implement retention plans.</li>
+          <li>Led organizational change initiative to integrate 3 product CX teams, driving <span class="highlight">20% increase in cross-selling revenue</span> while achieving economies of scale.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job fade-in">
+      <div class="job-meta">
+        <p class="job-company"><a href="https://www.amazon.com" target="_blank" rel="noopener">Amazon</a></p>
+        <p class="job-title">Launch Program Manager</p>
+        <p class="job-dates">Aug 2015 &ndash; Aug 2019</p>
+        <p class="job-location">Seattle, WA</p>
+      </div>
+      <div class="job-content">
+        <p class="job-subtitle">International expansion and marketplace partner operations</p>
+        <ul class="job-bullets">
+          <li>Delivered <span class="highlight">40% YoY revenue growth</span> with 70% of allocated budget across 8 countries in EU and APAC.</li>
+          <li>Scaled third-party restaurant partner onboarding <span class="highlight">8x</span> to support Prime Now expansion into 50+ US cities -- developed geographic launch plans, streamlined onboarding processes, and introduced automation.</li>
+          <li>Achieved <span class="highlight">25% increase in Prime member engagement</span> by overhauling strategic playbooks and building an incremental impact attribution model.</li>
+          <li>Reduced weekly effort by <span class="highlight">27%</span> for a 200-person sales team by identifying inefficiencies and leading CRM improvements from concept to launch.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job fade-in">
+      <div class="job-meta">
+        <p class="job-company"><a href="https://www.mphasis.com" target="_blank" rel="noopener">Mphasis Silverline</a></p>
+        <p class="job-title">Sales Operations Manager</p>
+        <p class="job-dates">Aug 2011 &ndash; Aug 2015</p>
+        <p class="job-location">New York, NY</p>
+      </div>
+      <div class="job-content">
+        <p class="job-subtitle">Founding team member (#13), product viability and customer operations</p>
+        <ul class="job-bullets">
+          <li>Joined as the 13th employee and the first hire for a new product. Closed initial deals that proved product-market fit, directly enabling the company's first PM hire and scaling the product into a multi-million dollar business line.</li>
+          <li>Built and grew the team from just me to 6 people, helping attract investment from <span class="highlight">Marc Benioff</span>.</li>
+          <li>Improved Salesforce CRM workflows that drove <span class="highlight">27% quota overperformance</span> across the sales team.</li>
+          <li>Decreased subscriber churn and achieved <span class="highlight">85%+ subscription renewal rate</span> for enterprise clients, exceeding the 75% annual goal.</li>
+          <li>Built two customer support portals from scratch and automated support operations, cutting issue resolution time by <span class="highlight">48 hours</span>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div style="margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--rule);" class="fade-in">
+      <p class="section-label">Tools &amp; Expertise</p>
+      <div class="tools-grid">
+        <div class="tool-group">
+          <span class="tool-group-label">AI &amp; Automation</span>
+          <div class="tool-group-items">GenAI reporting systems (RAG, context engineering, prompt engineering), LLM output evaluation, AI-powered VOC analysis, Claude, ChatGPT, workflow automation</div>
+        </div>
+        <div class="tool-group">
+          <span class="tool-group-label">Data &amp; Analysis</span>
+          <div class="tool-group-items">SQL, Advanced Excel, Tableau, QuickSight, LLM-powered dashboard generation</div>
+        </div>
+        <div class="tool-group">
+          <span class="tool-group-label">Program Management</span>
+          <div class="tool-group-items">Stage-gate / PDLC governance, LucidChart, Miro, Mural, Smartsheet, Asana, Confluence, SharePoint</div>
+        </div>
+        <div class="tool-group">
+          <span class="tool-group-label">CRM &amp; Customer Experience</span>
+          <div class="tool-group-items">Salesforce (Sales Cloud, Service Cloud), HubSpot, Qualtrics</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div style="margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--rule);" class="fade-in">
+      <p class="section-label">Education</p>
+      <div class="edu-row">
+        <div>
+          <p class="edu-school">University of Chicago Booth School of Business</p>
+          <p class="edu-degree">Master of Business Administration &mdash; Operations, Marketing, Strategic Management, Behavioral Science</p>
+        </div>
+        <p class="edu-location">Chicago, IL</p>
+      </div>
+      <div class="edu-row">
+        <div>
+          <p class="edu-school">State University of New York, Stony Brook</p>
+          <p class="edu-degree">Bachelor of Science, Biology</p>
+        </div>
+        <p class="edu-location">Stony Brook, NY</p>
+      </div>
+    </div>
+
+  </div><!-- end resume panel -->
+
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div>
+      <h2 class="contact-heading">Let's connect.</h2>
+      <p class="contact-sub">If you're working on something interesting and think my background is a fit, I'd love to hear about it.</p>
+    </div>
+    <div>
+      <div class="form-success" id="form-success">
+        Your message was sent. I'll be in touch shortly.
+      </div>
+      <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" required placeholder="Jane Smith">
+          </div>
+          <div class="form-field">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Acme Inc.">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="jane@acme.com">
+        </div>
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me about the opportunity..."></textarea>
+        </div>
+        <div class="form-submit">
+          <p class="form-note">Your information is never shared or sold.</p>
+          <button type="submit" class="btn-primary">Send Message &rarr;</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Kene Ezeoke &mdash; Seattle, WA</span>
+  <span>&copy; 2026</span>
+</footer>
+
+<script>
+  function observeFadeIns() {
+    const els = document.querySelectorAll('.fade-in:not(.visible)');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    els.forEach(el => obs.observe(el));
+  }
+
+  observeFadeIns();
+
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>
