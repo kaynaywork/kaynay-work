@@ -286,27 +286,25 @@
   .job-meta { }
 
   .job-company {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    text-transform: none;
-    color: var(--ink);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
     line-height: 1.1;
   }
 
   .job-company a {
-    color: inherit;
+    display: inline-block;
     text-decoration: none;
-    border-bottom: 1.5px solid var(--gold);
-    padding-bottom: 1px;
-    transition: color 0.2s, border-color 0.2s;
+    transition: opacity 0.2s;
   }
 
-  .job-company a:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+  .job-company a:hover { opacity: 0.7; }
+
+  .company-logo {
+    height: 24px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    object-position: left center;
+    display: block;
   }
 
   .job-title {
@@ -637,7 +635,7 @@
 
     <div class="job fade-in">
       <div class="job-meta">
-        <p class="job-company"><a href="https://www.amazon.com" target="_blank" rel="noopener">Amazon</a></p>
+        <p class="job-company"><a href="https://www.amazon.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-amazon.png" alt="Amazon"></a></p>
         <p class="job-title">Sr Program Manager</p>
         <p class="job-dates">Jul 2024 &ndash; Present</p>
         <p class="job-location">Seattle, WA</p>
@@ -657,7 +655,7 @@
 
     <div class="job fade-in">
       <div class="job-meta">
-        <p class="job-company"><a href="https://www.f5.com" target="_blank" rel="noopener">F5 Networks</a></p>
+        <p class="job-company"><a href="https://www.f5.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-f5.png" alt="F5 Networks"></a></p>
         <p class="job-title">Senior Program Manager, Business Operations</p>
         <p class="job-dates">Jan 2022 &ndash; Nov 2023</p>
         <p class="job-location">Seattle, WA</p>
@@ -676,7 +674,7 @@
 
     <div class="job fade-in">
       <div class="job-meta">
-        <p class="job-company"><a href="https://www.apple.com" target="_blank" rel="noopener">Apple</a></p>
+        <p class="job-company"><a href="https://www.apple.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-apple.png" alt="Apple"></a></p>
         <p class="job-title">Channel Partner Operations Manager</p>
         <p class="job-dates">Jun 2021 &ndash; Jan 2022</p>
         <p class="job-location">Austin, TX</p>
@@ -692,7 +690,7 @@
 
     <div class="job fade-in">
       <div class="job-meta">
-        <p class="job-company"><a href="https://www.google.com" target="_blank" rel="noopener">Google</a></p>
+        <p class="job-company"><a href="https://www.google.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-google.png" alt="Google"></a></p>
         <p class="job-title">Product Operations Manager</p>
         <p class="job-dates">Jun 2020 &ndash; Sep 2020</p>
         <p class="job-location">Mountain View, CA</p>
@@ -708,7 +706,7 @@
 
     <div class="job fade-in">
       <div class="job-meta">
-        <p class="job-company"><a href="https://www.amazon.com" target="_blank" rel="noopener">Amazon</a></p>
+        <p class="job-company"><a href="https://www.amazon.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-amazon.png" alt="Amazon"></a></p>
         <p class="job-title">Launch Program Manager</p>
         <p class="job-dates">Aug 2015 &ndash; Aug 2019</p>
         <p class="job-location">Seattle, WA</p>
@@ -726,7 +724,7 @@
 
     <div class="job fade-in">
       <div class="job-meta">
-        <p class="job-company"><a href="https://www.mphasis.com" target="_blank" rel="noopener">Mphasis Silverline</a></p>
+        <p class="job-company"><a href="https://silverlinecrm.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-silverline.png" alt="Mphasis Silverline"></a></p>
         <p class="job-title">Sales Operations Manager</p>
         <p class="job-dates">Aug 2011 &ndash; Aug 2015</p>
         <p class="job-location">New York, NY</p>
@@ -849,6 +847,15 @@
   }
 
   observeFadeIns();
+
+  document.querySelectorAll('.company-logo').forEach(img => {
+    img.addEventListener('error', function() {
+      const span = document.createElement('span');
+      span.textContent = this.alt;
+      span.style.cssText = 'font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--ink);';
+      this.replaceWith(span);
+    });
+  });
 
   const form = document.getElementById('contact-form');
   form.addEventListener('submit', async (e) => {
