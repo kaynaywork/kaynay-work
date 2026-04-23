@@ -83,7 +83,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 7rem 3rem 4rem;
+    padding: 7rem 3rem 5rem;
     position: relative;
     overflow: hidden;
   }
@@ -166,8 +166,49 @@
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    margin-bottom: 3rem;
     opacity: 0;
     animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  /* NEW: logo strip inside hero */
+  .hero-logo-strip {
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.65s forwards;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--rule);
+    max-width: 680px;
+  }
+
+  .hero-logo-strip-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-logo-strip-logos {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-logo-strip-logos img {
+    height: 28px;
+    width: auto;
+    max-width: 100px;
+    object-fit: contain;
+    object-position: left center;
+    opacity: 0.55;
+    transition: opacity 0.2s;
+    filter: grayscale(30%);
+  }
+
+  .hero-logo-strip-logos img:hover {
+    opacity: 1;
+    filter: none;
   }
 
   .btn-primary {
@@ -246,7 +287,6 @@
     margin: 0 auto;
   }
 
-  /* RESUME PANEL */
   .resume-panel { display: block; }
 
   /* SUMMARY */
@@ -383,43 +423,97 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.75rem;
     display: block;
   }
 
-  .tool-group-items {
-    font-size: 13px;
-    color: var(--ink-2);
-    line-height: 1.9;
-  }
-
-  /* EDUCATION */
-  .edu-row {
+  /* NEW: pill tags for tools */
+  .tool-pills {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--rule);
+    flex-wrap: wrap;
+    gap: 6px;
   }
 
-  .edu-school {
+  .tool-pill {
+    font-size: 12px;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    padding: 3px 10px;
+    border-radius: 100px;
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+
+  /* NEW: Education cards */
+  .edu-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-top: 0;
+  }
+
+  .edu-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+
+  .edu-logo-box {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .edu-logo-box img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .edu-logo-fallback {
     font-family: var(--serif);
-    font-size: 1.1rem;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-align: center;
+    line-height: 1.2;
+    padding: 4px;
+  }
+
+  .edu-card-body { flex: 1; }
+
+  .edu-card-school {
+    font-family: var(--serif);
+    font-size: 1.05rem;
     font-weight: 500;
     color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 4px;
   }
 
-  .edu-degree {
+  .edu-card-degree {
     font-size: 13px;
     color: var(--ink-2);
-    margin-top: 0.25rem;
+    line-height: 1.5;
+    margin-bottom: 3px;
   }
 
-  .edu-location {
-    font-size: 12px;
+  .edu-card-location {
+    font-size: 11px;
     color: var(--ink-3);
-    white-space: nowrap;
+    letter-spacing: 0.04em;
   }
 
   /* CONTACT */
@@ -566,6 +660,8 @@
     .form-row { grid-template-columns: 1fr; }
     footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
     .hero::before, .hero::after { display: none; }
+    .hero-logo-strip-logos { gap: 1.25rem; }
+    .edu-cards { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -591,6 +687,18 @@
       <a href="#resume" class="btn-primary">View Resume &darr;</a>
       <a href="#contact" class="btn-secondary">Get in Touch</a>
       <a href="resume.pdf" download class="btn-secondary">Download PDF &darr;</a>
+    </div>
+
+    <!-- NEW: logo strip -->
+    <div class="hero-logo-strip">
+      <p class="hero-logo-strip-label">Where I've built</p>
+      <div class="hero-logo-strip-logos">
+        <img src="logo-amazon.png" alt="Amazon">
+        <img src="logo-apple.png" alt="Apple">
+        <img src="logo-f5.png" alt="F5 Networks">
+        <img src="logo-google.png" alt="Google">
+        <img src="logo-silverline.png" alt="Silverline">
+      </div>
     </div>
   </div>
 </section>
@@ -624,7 +732,6 @@
 <!-- RESUME SECTION -->
 <section class="resume-section" id="resume">
 
-  <!-- RESUME -->
   <div class="resume-panel active" id="panel-startup">
 
     <p class="resume-summary fade-in">
@@ -747,19 +854,49 @@
       <div class="tools-grid">
         <div class="tool-group">
           <span class="tool-group-label">AI &amp; Automation</span>
-          <div class="tool-group-items">GenAI reporting systems (RAG, context engineering, prompt engineering), LLM output evaluation, AI-powered VOC analysis, Claude, ChatGPT, workflow automation</div>
+          <div class="tool-pills">
+            <span class="tool-pill">RAG</span>
+            <span class="tool-pill">Prompt engineering</span>
+            <span class="tool-pill">Context engineering</span>
+            <span class="tool-pill">LLM output evaluation</span>
+            <span class="tool-pill">GenAI reporting</span>
+            <span class="tool-pill">VOC analysis</span>
+            <span class="tool-pill">Claude</span>
+            <span class="tool-pill">ChatGPT</span>
+            <span class="tool-pill">Workflow automation</span>
+          </div>
         </div>
         <div class="tool-group">
           <span class="tool-group-label">Data &amp; Analysis</span>
-          <div class="tool-group-items">SQL, Advanced Excel, Tableau, QuickSight, LLM-powered dashboard generation</div>
+          <div class="tool-pills">
+            <span class="tool-pill">SQL</span>
+            <span class="tool-pill">Advanced Excel</span>
+            <span class="tool-pill">Tableau</span>
+            <span class="tool-pill">QuickSight</span>
+            <span class="tool-pill">LLM-powered dashboards</span>
+          </div>
         </div>
         <div class="tool-group">
           <span class="tool-group-label">Program Management</span>
-          <div class="tool-group-items">Stage-gate / PDLC governance, LucidChart, Miro, Mural, Smartsheet, Asana, Confluence, SharePoint</div>
+          <div class="tool-pills">
+            <span class="tool-pill">Stage-gate / PDLC</span>
+            <span class="tool-pill">LucidChart</span>
+            <span class="tool-pill">Miro</span>
+            <span class="tool-pill">Mural</span>
+            <span class="tool-pill">Smartsheet</span>
+            <span class="tool-pill">Asana</span>
+            <span class="tool-pill">Confluence</span>
+            <span class="tool-pill">SharePoint</span>
+          </div>
         </div>
         <div class="tool-group">
           <span class="tool-group-label">CRM &amp; Customer Experience</span>
-          <div class="tool-group-items">Salesforce (Sales Cloud, Service Cloud), HubSpot, Qualtrics</div>
+          <div class="tool-pills">
+            <span class="tool-pill">Salesforce Sales Cloud</span>
+            <span class="tool-pill">Service Cloud</span>
+            <span class="tool-pill">HubSpot</span>
+            <span class="tool-pill">Qualtrics</span>
+          </div>
         </div>
       </div>
     </div>
@@ -767,24 +904,42 @@
     <!-- EDUCATION -->
     <div style="margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--rule);" class="fade-in">
       <p class="section-label">Education</p>
-      <div class="edu-row">
-        <div>
-          <p class="edu-school">University of Chicago Booth School of Business</p>
-          <p class="edu-degree">Master of Business Administration &mdash; Operations, Marketing, Strategic Management, Behavioral Science</p>
+      <div class="edu-cards">
+
+        <div class="edu-card">
+          <div class="edu-logo-box">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/UChicago_shield.svg/240px-UChicago_shield.svg.png"
+              alt="University of Chicago Booth"
+              onerror="this.parentNode.innerHTML='<span class=edu-logo-fallback>BOOTH</span>'"
+            >
+          </div>
+          <div class="edu-card-body">
+            <p class="edu-card-school">University of Chicago Booth</p>
+            <p class="edu-card-degree">Master of Business Administration &mdash; Operations, Marketing, Strategic Management, Behavioral Science</p>
+            <p class="edu-card-location">Chicago, IL</p>
+          </div>
         </div>
-        <p class="edu-location">Chicago, IL</p>
-      </div>
-      <div class="edu-row">
-        <div>
-          <p class="edu-school">State University of New York, Stony Brook</p>
-          <p class="edu-degree">Bachelor of Science, Biology</p>
+
+        <div class="edu-card">
+          <div class="edu-logo-box">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Stony_Brook_University_seal.svg/240px-Stony_Brook_University_seal.svg.png"
+              alt="Stony Brook University"
+              onerror="this.parentNode.innerHTML='<span class=edu-logo-fallback>SUNY SB</span>'"
+            >
+          </div>
+          <div class="edu-card-body">
+            <p class="edu-card-school">SUNY Stony Brook</p>
+            <p class="edu-card-degree">Bachelor of Science, Biology</p>
+            <p class="edu-card-location">Stony Brook, NY</p>
+          </div>
         </div>
-        <p class="edu-location">Stony Brook, NY</p>
+
       </div>
     </div>
 
   </div><!-- end resume panel -->
-
 
 </section>
 
