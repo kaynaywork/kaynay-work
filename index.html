@@ -176,18 +176,20 @@
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 2rem 2.5rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     transition: box-shadow 0.2s;
+    overflow: hidden;
   }
   .role-card:hover {
     box-shadow: 0 4px 16px rgba(0,0,0,0.07);
   }
-  .role-header {
+  .role-toggle {
     display: flex;
     align-items: flex-start;
     gap: 1.2rem;
-    margin-bottom: 1rem;
+    padding: 2rem 2.5rem;
+    cursor: pointer;
+    user-select: none;
   }
   .role-logo {
     width: 44px; height: 44px;
@@ -207,6 +209,29 @@
     font-size: 0.82rem; color: var(--ink-light);
     text-align: right;
     white-space: nowrap;
+  }
+  .role-chevron {
+    font-size: 1.2rem;
+    color: var(--ink-light);
+    transition: transform 0.3s ease;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .role-card:not(.collapsed) .role-chevron {
+    transform: rotate(180deg);
+  }
+  .role-collapsible {
+    padding: 0 2.5rem 2rem;
+    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
+    max-height: 2000px;
+    opacity: 1;
+    overflow: hidden;
+  }
+  .role-card.collapsed .role-collapsible {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
   }
   .role-scope {
     font-size: 0.85rem; color: var(--teal-mid);
@@ -282,31 +307,30 @@
   }
   .edu-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.2rem;
   }
   .edu-card {
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 1.5rem 1.8rem;
+    padding: 1.2rem 1.5rem;
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
   .edu-logo {
-    width: 52px; height: 52px;
+    width: 44px; height: 44px;
     object-fit: contain;
     flex-shrink: 0;
   }
   .edu-name {
     font-weight: 600; font-size: 0.95rem; color: var(--navy);
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.1rem;
   }
   .edu-detail {
     font-size: 0.82rem; color: var(--ink-light);
-    line-height: 1.5;
   }
 
   /* CONTACT */
@@ -400,11 +424,10 @@
     .nav-links a { font-size: 11px; }
     .hero { padding: 3rem 1.2rem 2.5rem; }
     .hero h1 { font-size: 2rem; }
-    .role-header { flex-direction: column; gap: 0.5rem; }
+    .role-toggle { flex-wrap: wrap; gap: 0.8rem; padding: 1.5rem; }
     .role-dates { text-align: left; }
     .role-scope, .role-bullets { padding-left: 0; }
-    .role-card { padding: 1.5rem; }
-    .summary-card { padding: 1.5rem; }
+    .role-collapsible { padding-left: 1.5rem; padding-right: 1.5rem; }
     .logos { gap: 1.5rem; }
     .logos img { height: 22px; }
     .edu-cards { grid-template-columns: 1fr; }
@@ -478,117 +501,135 @@
 <h2 class="section-header" id="resume">Experience</h2>
 <div class="experience">
 
-  <!-- Amazon Current -->
-  <div class="role-card">
-    <div class="role-header">
+  <!-- Amazon Current (expanded by default) -->
+  <div class="role-card" id="card-amazon-current">
+    <div class="role-toggle" onclick="toggleCard('card-amazon-current')">
       <a href="https://www.amazon.com"><img src="https://www.kene.work/logo-amazon.png" alt="Amazon" class="role-logo"></a>
       <div class="role-meta">
         <div class="role-title">Sr Program Manager</div>
         <div class="role-company-line">Amazon</div>
       </div>
       <div class="role-dates">Jul 2024 &ndash; Present<br>Seattle, WA</div>
+      <div class="role-chevron">&#9662;</div>
     </div>
-    <div class="role-scope">Business performance and executive reporting | Add to Delivery</div>
-    <ul class="role-bullets">
-      <li>Built the business performance metrics program from scratch, standardizing reporting across 3 orgs and 4 partner teams. Program insights now reach Amazon board meetings and earnings calls.</li>
-      <li>Support the annual goal-setting process for Add to Delivery, contributing performance analysis and drafting sections of OP1/OP2 goal documents. Own the ongoing tracking cadence through monthly goal updates that roll into VP and S-team reporting, coordinate submission timelines across senior managers, and support QBRs with metrics reviews and performance callouts.</li>
-      <li>Designed and launched a GenAI reporting automation system using RAG architecture, writing the business logic and context engineering framework that enables LLMs to interpret performance data across multiple internal data sources. Built an LLM-as-a-judge AI scorecard to track quality week over week. Delivers weekly automated dashboards now used in VP-level reviews.</li>
-      <li>Built and deployed a CatBoost forecasting model for weekly metric noise classification, enabling the WBR process to automatically distinguish normal fluctuations from signals requiring investigation. Selected by cross-team consensus over competing approaches.</li>
-      <li>Built the VOC program from scratch, including a custom API tool that cut transcript collection from 4-6 hours to 15 minutes and a hybrid ML classification pipeline (sentence-transformer embeddings + keyword disambiguation) that reduced unclassified contacts from 22% to 9% and powers leadership MBR reporting. Analysis surfaced the duplicate order pattern that drove a product redesign and a new launch criteria metric. Program scales to 6 international markets with no added headcount or engineering resources.</li>
-      <li>Authored monthly executive business performance narratives analyzing business trends and metric movements, translating insights into prioritization recommendations. Drove product reprioritization, resulting in 1.6% reduction in customer cancellations and 1.2% reduction in return rates.</li>
-    </ul>
+    <div class="role-collapsible">
+      <div class="role-scope">Business performance and executive reporting | Add to Delivery</div>
+      <ul class="role-bullets">
+        <li>Built the business performance metrics program from scratch, standardizing reporting across 3 orgs and 4 partner teams. Program insights now reach Amazon board meetings and earnings calls.</li>
+        <li>Support the annual goal-setting process for Add to Delivery, contributing performance analysis and drafting sections of OP1/OP2 goal documents. Own the ongoing tracking cadence through monthly goal updates that roll into VP and S-team reporting, coordinate submission timelines across senior managers, and support QBRs with metrics reviews and performance callouts.</li>
+        <li>Designed and launched a GenAI reporting automation system using RAG architecture, writing the business logic and context engineering framework that enables LLMs to interpret performance data across multiple internal data sources. Built an LLM-as-a-judge AI scorecard to track quality week over week. Delivers weekly automated dashboards now used in VP-level reviews.</li>
+        <li>Built and deployed a CatBoost forecasting model for weekly metric noise classification, enabling the WBR process to automatically distinguish normal fluctuations from signals requiring investigation. Selected by cross-team consensus over competing approaches.</li>
+        <li>Built the VOC program from scratch, including a custom API tool that cut transcript collection from 4-6 hours to 15 minutes and a hybrid ML classification pipeline (sentence-transformer embeddings + keyword disambiguation) that reduced unclassified contacts from 22% to 9% and powers leadership MBR reporting. Analysis surfaced the duplicate order pattern that drove a product redesign and a new launch criteria metric. Program scales to 6 international markets with no added headcount or engineering resources.</li>
+        <li>Authored monthly executive business performance narratives analyzing business trends and metric movements, translating insights into prioritization recommendations. Drove product reprioritization, resulting in 1.6% reduction in customer cancellations and 1.2% reduction in return rates.</li>
+      </ul>
+    </div>
   </div>
 
-  <!-- F5 -->
-  <div class="role-card">
-    <div class="role-header">
+  <!-- F5 (collapsed) -->
+  <div class="role-card collapsed" id="card-f5">
+    <div class="role-toggle" onclick="toggleCard('card-f5')">
       <a href="https://www.f5.com"><img src="https://www.kene.work/logo-f5.png" alt="F5 Networks" class="role-logo"></a>
       <div class="role-meta">
         <div class="role-title">Senior Program Manager, Business Operations</div>
         <div class="role-company-line">F5 Networks</div>
       </div>
       <div class="role-dates">Jan 2022 &ndash; Nov 2023<br>Seattle, WA</div>
+      <div class="role-chevron">&#9662;</div>
     </div>
-    <div class="role-scope">Right-hand to Sr Director of Operations | PMO, product launches, process transformation</div>
-    <ul class="role-bullets">
-      <li>Redesigned the stage-gate process governing launches across a 100+ person organization spanning Product, Engineering, PMM, Support, Marketing, and SKU Management. Reduced launch cycle time by 20% by eliminating redundant gates, shifting ownership upfront, and building transparency mechanisms that kept supporting teams aligned without blocking delivery. Gained buy-in from Product VPs and the CPO before rolling out across the org.</li>
-      <li>Led the top-priority product launch through the new stage-gate process, shipping 50% faster than industry standard and delivering $45MM in annual revenue (+6% YoY) by driving 6 cross-functional teams through development, launch readiness, and GTM.</li>
-      <li>Drove the initial phases of F5's first outsourced hardware manufacturing initiative, owning partner identification, contract negotiation, and cross-functional coordination through v1 software testing with Flextronics and Dell.</li>
-      <li>Identified a VP-level problem with beta customer drop-off and a parallel sales team need for a customer pitch around delayed software, and solved both with one program. Redesigned the beta onboarding process to enable self-service, cutting onboarding time from 3-4 weeks to 1 week, and grew participation 10x including 2 new preorder conversions.</li>
-      <li>Reduced cycle time for OEM and partner procurement approvals by 50% by streamlining the approvals process and building a repeatable workflow for recurring partner payments.</li>
-    </ul>
+    <div class="role-collapsible">
+      <div class="role-scope">Right-hand to Sr Director of Operations | PMO, product launches, process transformation</div>
+      <ul class="role-bullets">
+        <li>Redesigned the stage-gate process governing launches across a 100+ person organization spanning Product, Engineering, PMM, Support, Marketing, and SKU Management. Reduced launch cycle time by 20% by eliminating redundant gates, shifting ownership upfront, and building transparency mechanisms that kept supporting teams aligned without blocking delivery. Gained buy-in from Product VPs and the CPO before rolling out across the org.</li>
+        <li>Led the top-priority product launch through the new stage-gate process, shipping 50% faster than industry standard and delivering $45MM in annual revenue (+6% YoY) by driving 6 cross-functional teams through development, launch readiness, and GTM.</li>
+        <li>Drove the initial phases of F5's first outsourced hardware manufacturing initiative, owning partner identification, contract negotiation, and cross-functional coordination through v1 software testing with Flextronics and Dell.</li>
+        <li>Identified a VP-level problem with beta customer drop-off and a parallel sales team need for a customer pitch around delayed software, and solved both with one program. Redesigned the beta onboarding process to enable self-service, cutting onboarding time from 3-4 weeks to 1 week, and grew participation 10x including 2 new preorder conversions.</li>
+        <li>Reduced cycle time for OEM and partner procurement approvals by 50% by streamlining the approvals process and building a repeatable workflow for recurring partner payments.</li>
+      </ul>
+    </div>
   </div>
 
-  <!-- Apple -->
-  <div class="role-card">
-    <div class="role-header">
+  <!-- Apple (collapsed) -->
+  <div class="role-card collapsed" id="card-apple">
+    <div class="role-toggle" onclick="toggleCard('card-apple')">
       <a href="https://www.apple.com"><img src="https://www.kene.work/logo-apple.png" alt="Apple" class="role-logo"></a>
       <div class="role-meta">
         <div class="role-title">Channel Partner Operations Manager</div>
         <div class="role-company-line">Apple</div>
       </div>
       <div class="role-dates">Jun 2021 &ndash; Jan 2022<br>Austin, TX</div>
+      <div class="role-chevron">&#9662;</div>
     </div>
-    <div class="role-scope">North America channel partner operations</div>
-    <ul class="role-bullets">
-      <li>Managed $500MM in North America revenue through operational planning, forecasting, and supply chain risk mitigation across Apple's retailer and distributor network with no inventory delays.</li>
-      <li>Built a first-of-its-kind internal backlog analysis tool using SQL and Excel macros to surface perishable order risk invisible in existing reporting, and drove $10MM+ in order recovery across Apple's retailer and distributor network.</li>
-    </ul>
+    <div class="role-collapsible">
+      <div class="role-scope">North America channel partner operations</div>
+      <ul class="role-bullets">
+        <li>Managed $500MM in North America revenue through operational planning, forecasting, and supply chain risk mitigation across Apple's retailer and distributor network with no inventory delays.</li>
+        <li>Built a first-of-its-kind internal backlog analysis tool using SQL and Excel macros to surface perishable order risk invisible in existing reporting, and drove $10MM+ in order recovery across Apple's retailer and distributor network.</li>
+      </ul>
+    </div>
   </div>
 
-  <!-- Google -->
-  <div class="role-card">
-    <div class="role-header">
+  <!-- Google (collapsed) -->
+  <div class="role-card collapsed" id="card-google">
+    <div class="role-toggle" onclick="toggleCard('card-google')">
       <a href="https://www.google.com"><img src="https://www.kene.work/logo-google.png" alt="Google" class="role-logo"></a>
       <div class="role-meta">
         <div class="role-title">Product Operations Manager</div>
         <div class="role-company-line">Google (MBA Intern)</div>
       </div>
       <div class="role-dates">Jun 2020 &ndash; Sep 2020<br>Mountain View, CA</div>
+      <div class="role-chevron">&#9662;</div>
     </div>
-    <div class="role-scope">Subscriber retention and CX team integration</div>
-    <ul class="role-bullets">
-      <li>Identified an existing StratOps churn model and applied it to proactively surface at-risk subscribers, partnering with marketing and support to implement retention plans that drove a 60% increase in subscriber engagement.</li>
-      <li>Designed the process and org restructuring recommendations to integrate 3 product CX teams, projecting a 20% increase in cross-selling revenue through shared infrastructure and reduced overhead.</li>
-    </ul>
+    <div class="role-collapsible">
+      <div class="role-scope">Subscriber retention and CX team integration</div>
+      <ul class="role-bullets">
+        <li>Identified an existing StratOps churn model and applied it to proactively surface at-risk subscribers, partnering with marketing and support to implement retention plans that drove a 60% increase in subscriber engagement.</li>
+        <li>Designed the process and org restructuring recommendations to integrate 3 product CX teams, projecting a 20% increase in cross-selling revenue through shared infrastructure and reduced overhead.</li>
+      </ul>
+    </div>
   </div>
 
-  <!-- Amazon Previous -->
-  <div class="role-card">
-    <div class="role-header">
+  <!-- Amazon Previous (collapsed) -->
+  <div class="role-card collapsed" id="card-amazon-prev">
+    <div class="role-toggle" onclick="toggleCard('card-amazon-prev')">
       <a href="https://www.amazon.com"><img src="https://www.kene.work/logo-amazon.png" alt="Amazon" class="role-logo"></a>
       <div class="role-meta">
         <div class="role-title">Launch Program Manager</div>
         <div class="role-company-line">Amazon</div>
       </div>
       <div class="role-dates">Aug 2015 &ndash; Aug 2019<br>Seattle, WA</div>
+      <div class="role-chevron">&#9662;</div>
     </div>
-    <div class="role-scope">International expansion and marketplace partner operations</div>
-    <ul class="role-bullets">
-      <li>Delivered 40% YoY revenue growth with 70% of allocated budget across 8 countries in the US, EU, and APAC by shifting from mass content acquisition to a targeted strategy, using BI analysis to identify which Prime Reading titles drove net positive outcomes for both readers and authors.</li>
-      <li>Scaled third-party restaurant partner onboarding 8x to support Prime Now expansion into 50+ US cities by developing geographic launch plans, streamlining onboarding processes, and introducing automation.</li>
-      <li>Reduced weekly effort by 27% for a 200-person sales team by identifying workflow inefficiencies and leading CRM improvements from concept to launch.</li>
-    </ul>
+    <div class="role-collapsible">
+      <div class="role-scope">International expansion and marketplace partner operations</div>
+      <ul class="role-bullets">
+        <li>Delivered 40% YoY revenue growth with 70% of allocated budget across 8 countries in the US, EU, and APAC by shifting from mass content acquisition to a targeted strategy, using BI analysis to identify which Prime Reading titles drove net positive outcomes for both readers and authors.</li>
+        <li>Scaled third-party restaurant partner onboarding 8x to support Prime Now expansion into 50+ US cities by developing geographic launch plans, streamlining onboarding processes, and introducing automation.</li>
+        <li>Reduced weekly effort by 27% for a 200-person sales team by identifying workflow inefficiencies and leading CRM improvements from concept to launch.</li>
+      </ul>
+    </div>
   </div>
 
-  <!-- Silverline -->
-  <div class="role-card">
-    <div class="role-header">
+  <!-- Silverline (collapsed) -->
+  <div class="role-card collapsed" id="card-silverline">
+    <div class="role-toggle" onclick="toggleCard('card-silverline')">
       <a href="https://silverlinecrm.com/calendaranything/"><img src="https://www.kene.work/logo-silverline.png" alt="Silverline" class="role-logo"></a>
       <div class="role-meta">
         <div class="role-title">Sales Operations Manager</div>
         <div class="role-company-line">Silverline (now part of Mphasis) &middot; Employee #13</div>
       </div>
       <div class="role-dates">Aug 2011 &ndash; Aug 2015<br>New York, NY</div>
+      <div class="role-chevron">&#9662;</div>
     </div>
-    <div class="role-scope">Founding team member | Product viability and customer operations</div>
-    <ul class="role-bullets">
-      <li>Closed the initial deals that proved product-market fit, directly funding the first PM hire and growing the product into a multi-million dollar business line.</li>
-      <li>Built a custom renewal system using account IDs and Stripe payment integration, giving enterprise clients a one-click renewal flow that drove 85%+ renewal rates against a 75% goal.</li>
-      <li>Designed and launched two Salesforce Service Cloud customer support portals, including case prioritization logic, assignment flows, and all support documentation. Automated reporting on case resolution cut issue resolution time by 48 hours.</li>
-      <li>Optimized Salesforce CRM workflows across the sales team, driving 27% quota overperformance.</li>
-      <li>Built and led the team from 1 to 6 people, helping attract investment from Marc Benioff to expand the business further.</li>
-    </ul>
+    <div class="role-collapsible">
+      <div class="role-scope">Founding team member | Product viability and customer operations</div>
+      <ul class="role-bullets">
+        <li>Closed the initial deals that proved product-market fit, directly funding the first PM hire and growing the product into a multi-million dollar business line.</li>
+        <li>Built a custom renewal system using account IDs and Stripe payment integration, giving enterprise clients a one-click renewal flow that drove 85%+ renewal rates against a 75% goal.</li>
+        <li>Designed and launched two Salesforce Service Cloud customer support portals, including case prioritization logic, assignment flows, and all support documentation. Automated reporting on case resolution cut issue resolution time by 48 hours.</li>
+        <li>Optimized Salesforce CRM workflows across the sales team, driving 27% quota overperformance.</li>
+        <li>Built and led the team from 1 to 6 people, helping attract investment from Marc Benioff to expand the business further.</li>
+      </ul>
+    </div>
   </div>
 
 </div>
@@ -655,17 +696,17 @@
 <div class="education-section">
   <div class="edu-cards">
     <div class="edu-card">
-      <img src="https://www.kene.work/logo-booth.png" alt="University of Chicago Booth" class="edu-logo">
+      <img src="https://www.kene.work/logo-booth.png" alt="Chicago Booth" class="edu-logo">
       <div>
-        <div class="edu-name">University of Chicago Booth</div>
-        <div class="edu-detail">Master of Business Administration<br>Operations, Marketing, Strategic Management, Behavioral Science</div>
+        <div class="edu-name">Chicago Booth</div>
+        <div class="edu-detail">MBA</div>
       </div>
     </div>
     <div class="edu-card">
       <img src="https://www.kene.work/logo-stonybrook.png" alt="Stony Brook University" class="edu-logo">
       <div>
-        <div class="edu-name">SUNY Stony Brook</div>
-        <div class="edu-detail">Bachelor of Science, Biology</div>
+        <div class="edu-name">Stony Brook University</div>
+        <div class="edu-detail">BSc</div>
       </div>
     </div>
   </div>
@@ -692,14 +733,18 @@
 </footer>
 
 <script>
+  function toggleCard(id) {
+    document.getElementById(id).classList.toggle('collapsed');
+  }
+
   // Contact form handling
-  const form = document.getElementById('contactForm');
-  const success = document.getElementById('formSuccess');
+  var form = document.getElementById('contactForm');
+  var success = document.getElementById('formSuccess');
   if (form) {
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       try {
-        const resp = await fetch(form.action, {
+        var resp = await fetch(form.action, {
           method: 'POST',
           body: new FormData(form),
           headers: { 'Accept': 'application/json' }
@@ -709,7 +754,6 @@
           success.style.display = 'block';
         }
       } catch(err) {
-        // fallback: just submit normally
         form.submit();
       }
     });
