@@ -4,1028 +4,740 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kene Ezeoke — Senior Program Manager</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #0e0e0e;
-    --ink-2: #3a3a3a;
-    --ink-3: #7a7a7a;
-    --paper: #f5f2ed;
-    --paper-2: #ede9e2;
-    --accent: #1a3a2a;
-    --accent-light: #2d5c42;
-    --gold: #8a6830;
-    --gold-light: #d4a96a;
-    --white: #ffffff;
-    --rule: rgba(14,14,14,0.12);
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f1c2e;
+    --navy-mid: #1a2e45;
+    --teal: #00b894;
+    --teal-light: #e6f9f4;
+    --teal-mid: #00a381;
+    --sand: #f7f4ef;
+    --sand-dark: #ede9e1;
+    --ink: #1a1a2e;
+    --ink-mid: #3d3d5c;
+    --ink-light: #6b7280;
+    --white: #ffffff;
+    --border: rgba(15,28,46,0.1);
+  }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--paper);
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sand);
     color: var(--ink);
-    font-family: var(--sans);
-    font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.6;
     font-size: 15px;
-    -webkit-font-smoothing: antialiased;
   }
 
   /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem 3rem;
-    background: rgba(245,242,237,0.92);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,244,239,0.92);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--rule);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
   }
-
   .nav-logo {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: var(--ink);
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--navy);
     text-decoration: none;
   }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    text-decoration: none;
+    font-size: 13px; font-weight: 500; color: var(--ink-mid);
+    text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;
     transition: color 0.2s;
   }
-
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover { color: var(--teal); }
 
   /* HERO */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 7rem 3rem 5rem;
+    background: var(--navy);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
     position: relative;
     overflow: hidden;
   }
-
   .hero::before {
     content: '';
-    position: absolute;
-    right: -4rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45vw;
-    height: 45vw;
-    border-radius: 50%;
-    border: 1px solid var(--rule);
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(0,184,148,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(0,184,148,0.05) 0%, transparent 50%);
     pointer-events: none;
   }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    right: -1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 32vw;
-    height: 32vw;
-    border-radius: 50%;
-    border: 1px solid var(--rule);
-    pointer-events: none;
+  .hero-location {
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 1rem; font-weight: 500;
   }
-
-  .hero-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .hero-tag {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.1s forwards;
-  }
-
-  .hero-name {
-    font-family: var(--serif);
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    font-weight: 500;
-    line-height: 1.0;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.2s forwards;
-  }
-
-  .hero-title {
-    font-family: var(--serif);
-    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-    font-weight: 400;
-    color: var(--ink-2);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.3s forwards;
-  }
-
-  .hero-desc {
-    max-width: 540px;
-    color: var(--ink-2);
-    font-size: 15px;
-    line-height: 1.8;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.4s forwards;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.5s forwards;
-  }
-
-  /* NEW: logo strip inside hero */
-  .hero-logo-strip {
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.65s forwards;
-    padding-top: 2.5rem;
-    border-top: 1px solid var(--rule);
-    max-width: 680px;
-  }
-
-  .hero-logo-strip-label {
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 1.25rem;
-  }
-
-  .hero-logo-strip-logos {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .hero-logo-strip-logos img {
-    height: 28px;
-    width: auto;
-    max-width: 100px;
-    object-fit: contain;
-    object-position: left center;
-    opacity: 0.55;
-    transition: opacity 0.2s;
-    filter: grayscale(30%);
-  }
-
-  .hero-logo-strip-logos img:hover {
-    opacity: 1;
-    filter: none;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--accent);
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     color: var(--white);
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.85rem 1.75rem;
-    transition: background 0.2s, transform 0.15s;
+    margin-bottom: 0.5rem;
+    line-height: 1.15;
   }
-
-  .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+  .hero-subtitle {
+    font-size: 1.1rem; color: rgba(255,255,255,0.7);
+    margin-bottom: 1.5rem; font-weight: 300;
+  }
+  .hero-blurb {
+    max-width: 680px; margin: 0 auto 2rem;
+    font-size: 0.95rem; color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+  .hero-buttons {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.7rem 1.6rem; border-radius: 6px;
+    font-size: 14px; font-weight: 500; text-decoration: none;
+    transition: all 0.25s;
+  }
+  .btn-primary {
+    background: var(--teal); color: var(--white);
+  }
+  .btn-primary:hover { background: var(--teal-mid); }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.8);
     background: transparent;
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.85rem 1.75rem;
-    border: 1px solid var(--ink);
-    transition: background 0.2s, color 0.2s, transform 0.15s;
   }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
 
-  .btn-secondary:hover { background: var(--ink); color: var(--white); transform: translateY(-1px); }
-
-  /* STATS STRIP */
-  .stats-strip {
-    background: var(--accent);
-    padding: 2rem 3rem;
-  }
-
-  .stats-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 2rem;
-  }
-
-  .stat {
+  /* LOGO STRIP */
+  .logo-strip {
+    background: var(--navy-mid);
+    padding: 2rem;
     text-align: center;
   }
-
-  .stat-num {
-    font-family: var(--serif);
-    font-size: 2.4rem;
-    font-weight: 500;
-    color: var(--white);
-    line-height: 1.1;
-    display: block;
+  .logo-strip-label {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 1.2rem; font-weight: 500;
   }
-
-  .stat-label {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-    margin-top: 0.25rem;
-    display: block;
+  .logos {
+    display: flex; justify-content: center; align-items: center;
+    gap: 2.5rem; flex-wrap: wrap;
   }
-
-  /* RESUME SECTION */
-  .resume-section {
-    padding: 5rem 3rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .resume-panel { display: block; }
-
-  /* SUMMARY */
-  .resume-summary {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.75;
-    color: var(--ink-2);
-    max-width: 800px;
-    margin-bottom: 3.5rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  /* SECTION LABEL */
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2rem;
-  }
-
-  /* JOB ENTRY */
-  .job {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 2rem;
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--rule);
-    position: relative;
-  }
-
-  .job:last-child { border-bottom: none; }
-
-  .job-meta { }
-
-  .job-company {
-    margin-bottom: 0.5rem;
-    line-height: 1.1;
-  }
-
-  .job-company a {
-    display: inline-block;
-    text-decoration: none;
+  .logos img {
+    height: 28px; opacity: 0.7; filter: brightness(0) invert(1);
     transition: opacity 0.2s;
   }
+  .logos img:hover { opacity: 1; }
 
-  .job-company a:hover { opacity: 0.7; }
-
-  .company-logo {
-    height: 40px;
-    width: auto;
-    max-width: 140px;
-    object-fit: contain;
-    object-position: left center;
-    display: block;
+  /* STATS */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
   }
-
-  .job-title {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 0.3rem;
-    line-height: 1.3;
+  .stat {
+    background: var(--sand);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
   }
-
-  .job-dates {
-    font-size: 12px;
-    color: var(--ink-3);
+  .stat-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: var(--teal);
     margin-bottom: 0.3rem;
   }
-
-  .job-location {
-    font-size: 12px;
-    color: var(--ink-3);
-    font-style: italic;
+  .stat-label {
+    font-size: 12px; color: var(--ink-light);
+    letter-spacing: 0.02em;
   }
 
-  .job-content { }
-
-  .job-subtitle {
-    font-size: 13px;
-    color: var(--ink-3);
-    font-style: italic;
-    margin-bottom: 1rem;
-    line-height: 1.5;
+  /* SUMMARY CARD */
+  .summary-section {
+    max-width: 820px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+  }
+  .summary-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.5rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--ink-mid);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
 
-  .job-bullets {
-    list-style: none;
+  /* EXPERIENCE */
+  .section-header {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--navy);
+    text-align: center;
+    margin: 3.5rem 0 2rem;
+  }
+  .experience {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 2rem;
   }
-
-  .job-bullets li {
-    font-size: 14px;
-    color: var(--ink-2);
-    line-height: 1.7;
-    padding-left: 1.25rem;
+  .role-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+  }
+  .role-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  }
+  .role-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .role-logo {
+    width: 44px; height: 44px;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .role-meta { flex: 1; }
+  .role-title {
+    font-weight: 600; font-size: 1.05rem; color: var(--navy);
+    margin-bottom: 0.15rem;
+  }
+  .role-company-line {
+    font-size: 0.85rem; color: var(--ink-light);
+  }
+  .role-dates {
+    font-size: 0.82rem; color: var(--ink-light);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .role-scope {
+    font-size: 0.85rem; color: var(--teal-mid);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    padding-left: 56px;
+  }
+  .role-bullets {
+    list-style: none;
+    padding-left: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .role-bullets li {
     position: relative;
+    padding-left: 1rem;
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
   }
-
-  .job-bullets li::before {
+  .role-bullets li::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 5px;
-    height: 1px;
-    background: var(--gold);
+    left: 0; top: 0.55rem;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
   }
 
-  .highlight {
-    color: var(--accent);
-    font-weight: 500;
+  /* TOOLS */
+  .tools-section {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
   }
-
-  /* TOOLS SECTION */
   .tools-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+    gap: 1.2rem;
   }
-
-  .tool-group { }
-
-  .tool-group-label {
-    font-size: 11px;
-    letter-spacing: 0.14em;
+  .tool-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .tool-card-title {
+    font-weight: 600; font-size: 0.85rem;
+    color: var(--navy);
+    margin-bottom: 0.8rem;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-    display: block;
+    letter-spacing: 0.04em;
   }
-
-  /* NEW: pill tags for tools */
-  .tool-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+  .tool-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
   }
-
-  .tool-pill {
+  .tool-tag {
     font-size: 12px;
-    color: var(--ink-2);
-    background: var(--paper-2);
-    border: 1px solid var(--rule);
-    padding: 3px 10px;
-    border-radius: 100px;
-    line-height: 1.6;
-    white-space: nowrap;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    background: var(--sand);
+    color: var(--ink-mid);
+    border: 1px solid var(--border);
   }
 
-  /* NEW: Education cards */
+  /* EDUCATION */
+  .education-section {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+  }
   .edu-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
-    margin-top: 0;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.2rem;
   }
-
   .edu-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
     background: var(--white);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-  }
-
-  .edu-logo-box {
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 1.8rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    gap: 1.2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
-
-  .edu-logo-box img {
-    width: 36px;
-    height: 36px;
+  .edu-logo {
+    width: 52px; height: 52px;
     object-fit: contain;
+    flex-shrink: 0;
   }
-
-  .edu-logo-fallback {
-    font-family: var(--serif);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent);
-    text-align: center;
-    line-height: 1.2;
-    padding: 4px;
+  .edu-name {
+    font-weight: 600; font-size: 0.95rem; color: var(--navy);
+    margin-bottom: 0.15rem;
   }
-
-  .edu-card-body { flex: 1; }
-
-  .edu-card-school {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.2;
-    margin-bottom: 4px;
-  }
-
-  .edu-card-degree {
-    font-size: 13px;
-    color: var(--ink-2);
+  .edu-detail {
+    font-size: 0.82rem; color: var(--ink-light);
     line-height: 1.5;
-    margin-bottom: 3px;
-  }
-
-  .edu-card-location {
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.04em;
   }
 
   /* CONTACT */
-  #contact {
-    background: var(--paper-2);
-    padding: 5rem 3rem;
-    border-top: 1px solid var(--rule);
+  .contact-section {
+    background: var(--navy);
+    padding: 4rem 2rem;
+    text-align: center;
   }
-
-  .contact-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 4rem;
-    align-items: start;
+  .contact-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 0.8rem;
   }
-
-  .contact-heading {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 500;
-    line-height: 1.1;
-    color: var(--ink);
-    margin-bottom: 1rem;
+  .contact-section p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    max-width: 500px;
+    margin: 0 auto 2rem;
   }
-
-  .contact-sub {
-    font-size: 14px;
-    color: var(--ink-2);
-    line-height: 1.8;
-  }
-
   .contact-form {
+    max-width: 480px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.8rem;
   }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .form-field label {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-  }
-
-  .form-field input,
-  .form-field textarea,
-  .form-field select {
-    background: var(--white);
-    border: 1px solid var(--rule);
-    padding: 0.75rem 1rem;
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.2s;
+  .contact-form input,
+  .contact-form textarea {
     width: 100%;
-    -webkit-appearance: none;
-    border-radius: 0;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    outline: none;
   }
-
-  .form-field input:focus,
-  .form-field textarea:focus,
-  .form-field select:focus {
-    border-color: var(--accent);
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: rgba(255,255,255,0.35);
   }
-
-  .form-field textarea { resize: vertical; min-height: 120px; }
-
-  .form-submit {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--teal);
   }
-
-  .form-note {
+  .contact-form textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  .contact-form .btn-submit {
+    background: var(--teal);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s;
+  }
+  .contact-form .btn-submit:hover { background: var(--teal-mid); }
+  .contact-privacy {
     font-size: 11px;
-    color: var(--ink-3);
+    color: rgba(255,255,255,0.3);
+    margin-top: 0.5rem;
   }
-
   .form-success {
     display: none;
-    background: var(--accent);
-    color: var(--white);
-    padding: 1rem 1.25rem;
-    font-size: 13px;
-    letter-spacing: 0.04em;
+    color: var(--teal);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
   }
 
   /* FOOTER */
   footer {
-    padding: 2rem 3rem;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.06em;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 12px;
+    color: var(--ink-light);
+    border-top: 1px solid var(--border);
   }
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .fade-in {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .hero { padding: 6rem 1.5rem 3rem; }
-    .stats-strip { padding: 2rem 1.5rem; }
-    .resume-section { padding: 3rem 1.5rem; }
-    .job { grid-template-columns: 1fr; gap: 0.75rem; }
-    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
-    #contact { padding: 3rem 1.5rem; }
-    .form-row { grid-template-columns: 1fr; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
-    .hero::before, .hero::after { display: none; }
-    .hero-logo-strip-logos { gap: 1.25rem; }
+  /* MOBILE */
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 11px; }
+    .hero { padding: 3rem 1.2rem 2.5rem; }
+    .hero h1 { font-size: 2rem; }
+    .role-header { flex-direction: column; gap: 0.5rem; }
+    .role-dates { text-align: left; }
+    .role-scope, .role-bullets { padding-left: 0; }
+    .role-card { padding: 1.5rem; }
+    .summary-card { padding: 1.5rem; }
+    .logos { gap: 1.5rem; }
+    .logos img { height: 22px; }
     .edu-cards { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Kene Ezeoke</a>
   <ul class="nav-links">
     <li><a href="#resume">Resume</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="resume.pdf" download>Download PDF</a></li>
+    <li><a href="https://www.kene.work/resume.pdf">Download PDF</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <p class="hero-tag">Seattle, WA</p>
-    <h1 class="hero-name">Kene Ezeoke</h1>
-    <p class="hero-title">Senior Program Manager &amp; Operator</p>
-    <p class="hero-desc">8+ years building programs from scratch at Amazon, Apple, Google, and F5. I thrive in ambiguous, high-growth environments where I can partner with leadership, stand up what doesn't exist yet, and drive measurable business outcomes.</p>
-    <div class="hero-actions">
-      <a href="#resume" class="btn-primary">View Resume &darr;</a>
-      <a href="#contact" class="btn-secondary">Get in Touch</a>
-      <a href="resume.pdf" download class="btn-secondary">Download PDF &darr;</a>
-    </div>
-
-    <!-- NEW: logo strip -->
-    <div class="hero-logo-strip">
-      <p class="hero-logo-strip-label">Where I've built</p>
-      <div class="hero-logo-strip-logos">
-        <img src="logo-amazon.png" alt="Amazon">
-        <img src="logo-apple.png" alt="Apple">
-        <img src="logo-f5.png" alt="F5 Networks">
-        <img src="logo-google.png" alt="Google">
-        <img src="logo-silverline.png" alt="Silverline">
-      </div>
-    </div>
+  <div class="hero-location">Seattle, WA</div>
+  <h1>Kene Ezeoke</h1>
+  <div class="hero-subtitle">Senior Program Manager & Operator</div>
+  <p class="hero-blurb">
+    8+ years building programs from scratch at Amazon, Apple, Google, and F5. I thrive in ambiguous, high-growth environments where I can partner with leadership, stand up what doesn't exist yet, and drive measurable business outcomes. Most recently, designing and deploying production ML models solo, with AI as the build team.
+  </p>
+  <div class="hero-buttons">
+    <a href="#resume" class="btn btn-primary">View Resume &#8595;</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    <a href="https://www.kene.work/resume.pdf" class="btn btn-outline">Download PDF &#8595;</a>
   </div>
 </section>
 
-<!-- STATS STRIP -->
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat">
-      <span class="stat-num">8+</span>
-      <span class="stat-label">Years in Big Tech</span>
+<!-- LOGO STRIP -->
+<div class="logo-strip">
+  <div class="logo-strip-label">Where I've built</div>
+  <div class="logos">
+    <img src="https://www.kene.work/logo-amazon.png" alt="Amazon">
+    <img src="https://www.kene.work/logo-apple.png" alt="Apple">
+    <img src="https://www.kene.work/logo-f5.png" alt="F5 Networks">
+    <img src="https://www.kene.work/logo-google.png" alt="Google">
+    <img src="https://www.kene.work/logo-silverline.png" alt="Silverline">
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-value">8+</div>
+    <div class="stat-label">Years in Big Tech</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">$45MM</div>
+    <div class="stat-label">Revenue driven at F5</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">$500MM</div>
+    <div class="stat-label">Revenue managed at Apple</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">40%</div>
+    <div class="stat-label">YoY Revenue growth at Amazon</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">50%</div>
+    <div class="stat-label">Faster launch cycles</div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary-section">
+  <div class="summary-card">
+    Joined a NYC startup as employee #13, closed the deals that proved product-market fit, built the team from 1 to 6, and helped attract investment from Marc Benioff. Since then, 8+ years across Amazon, Apple, Google, and F5 doing the same thing in different contexts: walking into ambiguity, building what doesn't exist, and making the results visible to the people who matter. I work best when the problem isn't fully defined yet. Chicago Booth MBA. Most recently, designing and deploying production ML models (forecasting and NLP classification) solo, with AI as the build team.
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<h2 class="section-header" id="resume">Experience</h2>
+<div class="experience">
+
+  <!-- Amazon Current -->
+  <div class="role-card">
+    <div class="role-header">
+      <a href="https://www.amazon.com"><img src="https://www.kene.work/logo-amazon.png" alt="Amazon" class="role-logo"></a>
+      <div class="role-meta">
+        <div class="role-title">Sr Program Manager</div>
+        <div class="role-company-line">Amazon</div>
+      </div>
+      <div class="role-dates">Jul 2024 &ndash; Present<br>Seattle, WA</div>
     </div>
-    <div class="stat">
-      <span class="stat-num">$45MM</span>
-      <span class="stat-label">Revenue driven at F5</span>
+    <div class="role-scope">Business performance and executive reporting | Add to Delivery</div>
+    <ul class="role-bullets">
+      <li>Built the business performance metrics program from scratch, standardizing reporting across 3 orgs and 4 partner teams. Program insights now reach Amazon board meetings and earnings calls.</li>
+      <li>Support the annual goal-setting process for Add to Delivery, contributing performance analysis and drafting sections of OP1/OP2 goal documents. Own the ongoing tracking cadence through monthly goal updates that roll into VP and S-team reporting, coordinate submission timelines across senior managers, and support QBRs with metrics reviews and performance callouts.</li>
+      <li>Designed and launched a GenAI reporting automation system using RAG architecture, writing the business logic and context engineering framework that enables LLMs to interpret performance data across multiple internal data sources. Built an LLM-as-a-judge AI scorecard to track quality week over week. Delivers weekly automated dashboards now used in VP-level reviews.</li>
+      <li>Built and deployed a CatBoost forecasting model for weekly metric noise classification, enabling the WBR process to automatically distinguish normal fluctuations from signals requiring investigation. Selected by cross-team consensus over competing approaches.</li>
+      <li>Built the VOC program from scratch, including a custom API tool that cut transcript collection from 4-6 hours to 15 minutes and a hybrid ML classification pipeline (sentence-transformer embeddings + keyword disambiguation) that reduced unclassified contacts from 22% to 9% and powers leadership MBR reporting. Analysis surfaced the duplicate order pattern that drove a product redesign and a new launch criteria metric. Program scales to 6 international markets with no added headcount or engineering resources.</li>
+      <li>Authored monthly executive business performance narratives analyzing business trends and metric movements, translating insights into prioritization recommendations. Drove product reprioritization, resulting in 1.6% reduction in customer cancellations and 1.2% reduction in return rates.</li>
+    </ul>
+  </div>
+
+  <!-- F5 -->
+  <div class="role-card">
+    <div class="role-header">
+      <a href="https://www.f5.com"><img src="https://www.kene.work/logo-f5.png" alt="F5 Networks" class="role-logo"></a>
+      <div class="role-meta">
+        <div class="role-title">Senior Program Manager, Business Operations</div>
+        <div class="role-company-line">F5 Networks</div>
+      </div>
+      <div class="role-dates">Jan 2022 &ndash; Nov 2023<br>Seattle, WA</div>
     </div>
-    <div class="stat">
-      <span class="stat-num">$500MM</span>
-      <span class="stat-label">Revenue managed at Apple</span>
+    <div class="role-scope">Right-hand to Sr Director of Operations | PMO, product launches, process transformation</div>
+    <ul class="role-bullets">
+      <li>Redesigned the stage-gate process governing launches across a 100+ person organization spanning Product, Engineering, PMM, Support, Marketing, and SKU Management. Reduced launch cycle time by 20% by eliminating redundant gates, shifting ownership upfront, and building transparency mechanisms that kept supporting teams aligned without blocking delivery. Gained buy-in from Product VPs and the CPO before rolling out across the org.</li>
+      <li>Led the top-priority product launch through the new stage-gate process, shipping 50% faster than industry standard and delivering $45MM in annual revenue (+6% YoY) by driving 6 cross-functional teams through development, launch readiness, and GTM.</li>
+      <li>Drove the initial phases of F5's first outsourced hardware manufacturing initiative, owning partner identification, contract negotiation, and cross-functional coordination through v1 software testing with Flextronics and Dell.</li>
+      <li>Identified a VP-level problem with beta customer drop-off and a parallel sales team need for a customer pitch around delayed software, and solved both with one program. Redesigned the beta onboarding process to enable self-service, cutting onboarding time from 3-4 weeks to 1 week, and grew participation 10x including 2 new preorder conversions.</li>
+      <li>Reduced cycle time for OEM and partner procurement approvals by 50% by streamlining the approvals process and building a repeatable workflow for recurring partner payments.</li>
+    </ul>
+  </div>
+
+  <!-- Apple -->
+  <div class="role-card">
+    <div class="role-header">
+      <a href="https://www.apple.com"><img src="https://www.kene.work/logo-apple.png" alt="Apple" class="role-logo"></a>
+      <div class="role-meta">
+        <div class="role-title">Channel Partner Operations Manager</div>
+        <div class="role-company-line">Apple</div>
+      </div>
+      <div class="role-dates">Jun 2021 &ndash; Jan 2022<br>Austin, TX</div>
     </div>
-    <div class="stat">
-      <span class="stat-num">40% YoY</span>
-      <span class="stat-label">Revenue growth at Amazon</span>
+    <div class="role-scope">North America channel partner operations</div>
+    <ul class="role-bullets">
+      <li>Managed $500MM in North America revenue through operational planning, forecasting, and supply chain risk mitigation across Apple's retailer and distributor network with no inventory delays.</li>
+      <li>Built a first-of-its-kind internal backlog analysis tool using SQL and Excel macros to surface perishable order risk invisible in existing reporting, and drove $10MM+ in order recovery across Apple's retailer and distributor network.</li>
+    </ul>
+  </div>
+
+  <!-- Google -->
+  <div class="role-card">
+    <div class="role-header">
+      <a href="https://www.google.com"><img src="https://www.kene.work/logo-google.png" alt="Google" class="role-logo"></a>
+      <div class="role-meta">
+        <div class="role-title">Product Operations Manager</div>
+        <div class="role-company-line">Google (MBA Intern)</div>
+      </div>
+      <div class="role-dates">Jun 2020 &ndash; Sep 2020<br>Mountain View, CA</div>
     </div>
-    <div class="stat">
-      <span class="stat-num">50%</span>
-      <span class="stat-label">Faster launch cycles</span>
+    <div class="role-scope">Subscriber retention and CX team integration</div>
+    <ul class="role-bullets">
+      <li>Identified an existing StratOps churn model and applied it to proactively surface at-risk subscribers, partnering with marketing and support to implement retention plans that drove a 60% increase in subscriber engagement.</li>
+      <li>Designed the process and org restructuring recommendations to integrate 3 product CX teams, projecting a 20% increase in cross-selling revenue through shared infrastructure and reduced overhead.</li>
+    </ul>
+  </div>
+
+  <!-- Amazon Previous -->
+  <div class="role-card">
+    <div class="role-header">
+      <a href="https://www.amazon.com"><img src="https://www.kene.work/logo-amazon.png" alt="Amazon" class="role-logo"></a>
+      <div class="role-meta">
+        <div class="role-title">Launch Program Manager</div>
+        <div class="role-company-line">Amazon</div>
+      </div>
+      <div class="role-dates">Aug 2015 &ndash; Aug 2019<br>Seattle, WA</div>
+    </div>
+    <div class="role-scope">International expansion and marketplace partner operations</div>
+    <ul class="role-bullets">
+      <li>Delivered 40% YoY revenue growth with 70% of allocated budget across 8 countries in the US, EU, and APAC by shifting from mass content acquisition to a targeted strategy, using BI analysis to identify which Prime Reading titles drove net positive outcomes for both readers and authors.</li>
+      <li>Scaled third-party restaurant partner onboarding 8x to support Prime Now expansion into 50+ US cities by developing geographic launch plans, streamlining onboarding processes, and introducing automation.</li>
+      <li>Reduced weekly effort by 27% for a 200-person sales team by identifying workflow inefficiencies and leading CRM improvements from concept to launch.</li>
+    </ul>
+  </div>
+
+  <!-- Silverline -->
+  <div class="role-card">
+    <div class="role-header">
+      <a href="https://silverlinecrm.com/calendaranything/"><img src="https://www.kene.work/logo-silverline.png" alt="Silverline" class="role-logo"></a>
+      <div class="role-meta">
+        <div class="role-title">Sales Operations Manager</div>
+        <div class="role-company-line">Silverline (now part of Mphasis) &middot; Employee #13</div>
+      </div>
+      <div class="role-dates">Aug 2011 &ndash; Aug 2015<br>New York, NY</div>
+    </div>
+    <div class="role-scope">Founding team member | Product viability and customer operations</div>
+    <ul class="role-bullets">
+      <li>Closed the initial deals that proved product-market fit, directly funding the first PM hire and growing the product into a multi-million dollar business line.</li>
+      <li>Built a custom renewal system using account IDs and Stripe payment integration, giving enterprise clients a one-click renewal flow that drove 85%+ renewal rates against a 75% goal.</li>
+      <li>Designed and launched two Salesforce Service Cloud customer support portals, including case prioritization logic, assignment flows, and all support documentation. Automated reporting on case resolution cut issue resolution time by 48 hours.</li>
+      <li>Optimized Salesforce CRM workflows across the sales team, driving 27% quota overperformance.</li>
+      <li>Built and led the team from 1 to 6 people, helping attract investment from Marc Benioff to expand the business further.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- TOOLS -->
+<h2 class="section-header">Tools & Expertise</h2>
+<div class="tools-section">
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-card-title">AI & Automation</div>
+      <div class="tool-tags">
+        <span class="tool-tag">NLP / Text Classification</span>
+        <span class="tool-tag">Sentence-Transformer Embeddings</span>
+        <span class="tool-tag">Time Series Forecasting</span>
+        <span class="tool-tag">Prophet</span>
+        <span class="tool-tag">Chronos 2</span>
+        <span class="tool-tag">CatBoost</span>
+        <span class="tool-tag">RAG</span>
+        <span class="tool-tag">LLM Evaluation & Scoring</span>
+        <span class="tool-tag">Context Engineering</span>
+        <span class="tool-tag">Prompt Engineering</span>
+        <span class="tool-tag">AI-Assisted Development</span>
+        <span class="tool-tag">Workflow Automation</span>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-card-title">Data & Analysis</div>
+      <div class="tool-tags">
+        <span class="tool-tag">SQL</span>
+        <span class="tool-tag">Advanced Excel</span>
+        <span class="tool-tag">Tableau</span>
+        <span class="tool-tag">QuickSight</span>
+        <span class="tool-tag">LLM-Powered Dashboards</span>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-card-title">Program Management</div>
+      <div class="tool-tags">
+        <span class="tool-tag">Lean Six Sigma Green Belt</span>
+        <span class="tool-tag">Stage-Gate / PDLC</span>
+        <span class="tool-tag">LucidChart</span>
+        <span class="tool-tag">Miro</span>
+        <span class="tool-tag">Mural</span>
+        <span class="tool-tag">Smartsheet</span>
+        <span class="tool-tag">Asana</span>
+        <span class="tool-tag">Confluence</span>
+        <span class="tool-tag">SharePoint</span>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-card-title">CRM & Customer Experience</div>
+      <div class="tool-tags">
+        <span class="tool-tag">Salesforce Sales Cloud</span>
+        <span class="tool-tag">Salesforce Service Cloud</span>
+        <span class="tool-tag">HubSpot</span>
+        <span class="tool-tag">Qualtrics</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- RESUME SECTION -->
-<section class="resume-section" id="resume">
-
-  <div class="resume-panel active" id="panel-startup">
-
-    <p class="resume-summary fade-in">
-      Started as employee #13 at a NYC SaaS startup -- proved product viability, built the team from 1 to 6, and helped attract investment from Marc Benioff. Since then, 8+ years driving measurable outcomes at Amazon, Apple, Google, and F5, influencing decisions from frontline operations to S-team and board-level audiences. I bring a consistent pattern of identifying missing or broken processes and replacing them with scalable systems -- increasingly using GenAI and LLM-powered automation to do work that was previously impossible at scale. Chicago Booth MBA.
-    </p>
-
-    <p class="section-label">Experience</p>
-
-    <div class="job fade-in">
-      <div class="job-meta">
-        <p class="job-company"><a href="https://www.amazon.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-amazon.png" alt="Amazon"></a></p>
-        <p class="job-title">Sr Program Manager</p>
-        <p class="job-dates">Jul 2024 &ndash; Present</p>
-        <p class="job-location">Seattle, WA</p>
-      </div>
-      <div class="job-content">
-        <p class="job-subtitle">Business performance and executive reporting for Add to Delivery | S-team, board, and VP-level visibility</p>
-        <ul class="job-bullets">
-          <li>Built the business performance metrics program from zero, standardizing reporting across 3 orgs and 4 partner teams and cutting BI data requests by <span class="highlight">50%</span>. Program insights have reached Amazon board meetings and earnings call callouts.</li>
-          <li>Authored executive-level performance narratives that directly drove product reprioritization, resulting in <span class="highlight">double-digit basis point improvements</span> across both cancellation and return rate metrics.</li>
-          <li>Designed and launched a GenAI-powered reporting automation system: wrote the business logic and context engineering framework enabling LLMs to interpret performance data, set the roadmap for data infrastructure, and delivered weekly automated dashboards now used across VP-level leadership. Built an AI output scorecard to track quality improvements week over week.</li>
-          <li>Stood up the Voice of Customer program from scratch, building feedback dashboards and using GenAI to analyze customer anecdotes at scale, surfacing recurring themes and pain points previously invisible in manual review.</li>
-          <li>Delivered first Customer Listening Session in <span class="highlight">2 weeks</span> (typical lead time: 60+ days) and unblocked stalled customer support content within 3 weeks. Both had been stuck for months.</li>
-          <li>Use AI daily across core workflows: analysis synthesis, stakeholder meeting preparation, executive communications, and rapid iteration on strategic documents.</li>
-        </ul>
+<!-- EDUCATION -->
+<h2 class="section-header">Education</h2>
+<div class="education-section">
+  <div class="edu-cards">
+    <div class="edu-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/UChicago_shield.svg/240px-UChicago_shield.svg.png" alt="University of Chicago Booth" class="edu-logo">
+      <div>
+        <div class="edu-name">University of Chicago Booth</div>
+        <div class="edu-detail">Master of Business Administration<br>Operations, Marketing, Strategic Management, Behavioral Science</div>
       </div>
     </div>
-
-    <div class="job fade-in">
-      <div class="job-meta">
-        <p class="job-company"><a href="https://www.f5.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-f5.png" alt="F5 Networks"></a></p>
-        <p class="job-title">Senior Program Manager, Business Operations</p>
-        <p class="job-dates">Jan 2022 &ndash; Nov 2023</p>
-        <p class="job-location">Seattle, WA</p>
+    <div class="edu-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Stony_Brook_University_seal.svg/240px-Stony_Brook_University_seal.svg.png" alt="Stony Brook University" class="edu-logo">
+      <div>
+        <div class="edu-name">SUNY Stony Brook</div>
+        <div class="edu-detail">Bachelor of Science, Biology</div>
       </div>
-      <div class="job-content">
-        <p class="job-subtitle">Right-hand program lead to Sr Director of Operations; PMO, product launches, and process transformation</p>
-        <ul class="job-bullets">
-          <li>Led company-wide PMO and PDLC overhaul, redesigning the stage-gate process governing launches across a 100+ person org spanning Product, Engineering, PMM, Support, Marketing, and SKU Management. Reduced cycle time by <span class="highlight">20%</span>. Gained buy-in from Product VPs and the CPO.</li>
-          <li>Led top-priority product launch through the new stage-gate process to ship <span class="highlight">50% faster than industry standard</span>, delivering <span class="highlight">$45MM in annual revenue</span> (+6% YoY).</li>
-          <li>Drove early phases of F5's first outsourced hardware manufacturing initiative, partnering with Flextronics and Dell. Owned partner identification, contract negotiation, and cross-functional coordination.</li>
-          <li>Reduced OEM and partner procurement approval cycle time by <span class="highlight">50%</span> by eliminating bottlenecks and building a repeatable workflow.</li>
-          <li>Overhauled the software beta program and grew participation <span class="highlight">10x</span> through new customer acquisition strategies and operational improvements.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="job fade-in">
-      <div class="job-meta">
-        <p class="job-company"><a href="https://www.apple.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-apple.png" alt="Apple"></a></p>
-        <p class="job-title">Channel Partner Operations Manager</p>
-        <p class="job-dates">Jun 2021 &ndash; Jan 2022</p>
-        <p class="job-location">Austin, TX</p>
-      </div>
-      <div class="job-content">
-        <p class="job-subtitle">North America channel partner operations and supply chain</p>
-        <ul class="job-bullets">
-          <li>Managed <span class="highlight">$500MM</span> in North America revenue through operational planning, forecasting, and supply chain risk mitigation with zero inventory delays.</li>
-          <li>Recovered <span class="highlight">$10MM+</span> in perishable orders by building a first-of-its-kind internal backlog analysis tool for account management teams.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="job fade-in">
-      <div class="job-meta">
-        <p class="job-company"><a href="https://www.google.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-google.png" alt="Google"></a></p>
-        <p class="job-title">Product Operations Manager</p>
-        <p class="job-dates">Jun 2020 &ndash; Sep 2020</p>
-        <p class="job-location">Mountain View, CA</p>
-      </div>
-      <div class="job-content">
-        <p class="job-subtitle">Subscriber retention and CX team integration (MBA Intern)</p>
-        <ul class="job-bullets">
-          <li>Drove <span class="highlight">60% increase in subscriber engagement</span> by synthesizing VOC data to identify at-risk subscribers, then collaborating with marketing and support to implement retention plans.</li>
-          <li>Led organizational change initiative to integrate 3 product CX teams, driving <span class="highlight">20% increase in cross-selling revenue</span> while achieving economies of scale.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="job fade-in">
-      <div class="job-meta">
-        <p class="job-company"><a href="https://www.amazon.com" target="_blank" rel="noopener"><img class="company-logo" src="logo-amazon.png" alt="Amazon"></a></p>
-        <p class="job-title">Launch Program Manager</p>
-        <p class="job-dates">Aug 2015 &ndash; Aug 2019</p>
-        <p class="job-location">Seattle, WA</p>
-      </div>
-      <div class="job-content">
-        <p class="job-subtitle">Kindle subscriptions international expansion and Restaurants marketplace partner operations</p>
-        <ul class="job-bullets">
-          <li>Delivered <span class="highlight">40% YoY revenue growth</span> with 70% of allocated budget across 8 countries in EU and APAC.</li>
-          <li>Scaled third-party restaurant partner onboarding <span class="highlight">8x</span> to support Prime Now expansion into 50+ US cities -- developed geographic launch plans, streamlined onboarding processes, and introduced automation.</li>
-          <li>Achieved <span class="highlight">25% increase in Prime member engagement</span> by overhauling strategic playbooks and building an incremental impact attribution model.</li>
-          <li>Reduced weekly effort by <span class="highlight">27%</span> for a 200-person sales team by identifying inefficiencies and leading CRM improvements from concept to launch.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="job fade-in">
-      <div class="job-meta">
-        <p class="job-company"><a href="https://silverlinecrm.com/calendaranything/" target="_blank" rel="noopener"><img class="company-logo" src="logo-silverline.png" alt="Mphasis Silverline"></a></p>
-        <p class="job-title">Sales Operations Manager</p>
-        <p class="job-dates">Aug 2011 &ndash; Aug 2015</p>
-        <p class="job-location">New York, NY</p>
-      </div>
-      <div class="job-content">
-        <p class="job-subtitle">Founding team member for enterprise SaaS calendar app, product viability and customer operations</p>
-        <ul class="job-bullets">
-          <li>Joined as the 13th employee at Mphasis Silverline and the first hire for a new product, CalendarAnything. Closed initial deals that proved product-market fit, directly enabling the company's first PM hire and scaling the product into a multi-million dollar business line.</li>
-          <li>Built and grew the team from just me to 6 people, helping attract investment from <span class="highlight">Marc Benioff</span>.</li>
-          <li>Improved Salesforce CRM workflows that drove <span class="highlight">27% quota overperformance</span> across the sales team.</li>
-          <li>Decreased subscriber churn and achieved <span class="highlight">85%+ subscription renewal rate</span> for enterprise clients, exceeding the 75% annual goal.</li>
-          <li>Built two customer support portals from scratch and automated support operations, cutting issue resolution time by <span class="highlight">48 hours</span>.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- TOOLS -->
-    <div style="margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--rule);" class="fade-in">
-      <p class="section-label">Tools &amp; Expertise</p>
-      <div class="tools-grid">
-        <div class="tool-group">
-          <span class="tool-group-label">AI &amp; Automation</span>
-          <div class="tool-pills">
-            <span class="tool-pill">RAG</span>
-            <span class="tool-pill">Prompt engineering</span>
-            <span class="tool-pill">Context engineering</span>
-            <span class="tool-pill">LLM output evaluation</span>
-            <span class="tool-pill">GenAI reporting</span>
-            <span class="tool-pill">VOC analysis</span>
-            <span class="tool-pill">Claude</span>
-            <span class="tool-pill">ChatGPT</span>
-            <span class="tool-pill">Workflow automation</span>
-          </div>
-        </div>
-        <div class="tool-group">
-          <span class="tool-group-label">Data &amp; Analysis</span>
-          <div class="tool-pills">
-            <span class="tool-pill">SQL</span>
-            <span class="tool-pill">Advanced Excel</span>
-            <span class="tool-pill">Tableau</span>
-            <span class="tool-pill">QuickSight</span>
-            <span class="tool-pill">LLM-powered dashboards</span>
-          </div>
-        </div>
-        <div class="tool-group">
-          <span class="tool-group-label">Program Management</span>
-          <div class="tool-pills">
-            <span class="tool-pill">Stage-gate / PDLC</span>
-            <span class="tool-pill">LucidChart</span>
-            <span class="tool-pill">Miro</span>
-            <span class="tool-pill">Mural</span>
-            <span class="tool-pill">Smartsheet</span>
-            <span class="tool-pill">Asana</span>
-            <span class="tool-pill">Confluence</span>
-            <span class="tool-pill">SharePoint</span>
-          </div>
-        </div>
-        <div class="tool-group">
-          <span class="tool-group-label">CRM &amp; Customer Experience</span>
-          <div class="tool-pills">
-            <span class="tool-pill">Salesforce Sales Cloud</span>
-            <span class="tool-pill">Service Cloud</span>
-            <span class="tool-pill">HubSpot</span>
-            <span class="tool-pill">Qualtrics</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- EDUCATION -->
-    <div style="margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--rule);" class="fade-in">
-      <p class="section-label">Education</p>
-      <div class="edu-cards">
-
-        <div class="edu-card">
-          <div class="edu-logo-box">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/UChicago_shield.svg/240px-UChicago_shield.svg.png"
-              alt="University of Chicago Booth"
-              onerror="this.parentNode.innerHTML='<span class=edu-logo-fallback>BOOTH</span>'"
-            >
-          </div>
-          <div class="edu-card-body">
-            <p class="edu-card-school">University of Chicago Booth</p>
-            <p class="edu-card-degree">Master of Business Administration &mdash; Operations, Marketing, Strategic Management, Behavioral Science</p>
-            <p class="edu-card-location">Chicago, IL</p>
-          </div>
-        </div>
-
-        <div class="edu-card">
-          <div class="edu-logo-box">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Stony_Brook_University_seal.svg/240px-Stony_Brook_University_seal.svg.png"
-              alt="Stony Brook University"
-              onerror="this.parentNode.innerHTML='<span class=edu-logo-fallback>SUNY SB</span>'"
-            >
-          </div>
-          <div class="edu-card-body">
-            <p class="edu-card-school">SUNY Stony Brook</p>
-            <p class="edu-card-degree">Bachelor of Science, Biology</p>
-            <p class="edu-card-location">Stony Brook, NY</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div><!-- end resume panel -->
-
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner">
-    <div>
-      <h2 class="contact-heading">Let's connect.</h2>
-      <p class="contact-sub">If you're working on something interesting and think my background is a fit, I'd love to hear about it.</p>
-    </div>
-    <div>
-      <div class="form-success" id="form-success">
-        Your message was sent. I'll be in touch shortly.
-      </div>
-      <form class="contact-form" id="contact-form" action="https://formspree.io/f/mbdqoarz" method="POST">
-        <div class="form-row">
-          <div class="form-field">
-            <label for="name">Your name</label>
-            <input type="text" id="name" name="name" required placeholder="Jane Smith">
-          </div>
-          <div class="form-field">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="company" placeholder="Acme Inc.">
-          </div>
-        </div>
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required placeholder="jane@acme.com">
-        </div>
-        <div class="form-field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell me about the opportunity..."></textarea>
-        </div>
-        <div class="form-submit">
-          <p class="form-note">Your information is never shared or sold.</p>
-          <button type="submit" class="btn-primary">Send Message &rarr;</button>
-        </div>
-      </form>
     </div>
   </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <h2>Let's connect.</h2>
+  <p>If you're working on something interesting and think my background is a fit, I'd love to hear about it.</p>
+  <div class="form-success" id="formSuccess">Your message was sent. I'll be in touch shortly.</div>
+  <form class="contact-form" id="contactForm" action="https://formspree.io/f/mbdqoarz" method="POST">
+    <input type="text" name="name" placeholder="Your name" required>
+    <input type="text" name="company" placeholder="Company">
+    <input type="email" name="email" placeholder="Email" required>
+    <textarea name="message" placeholder="Message" required></textarea>
+    <button type="submit" class="btn-submit">Send Message &rarr;</button>
+    <div class="contact-privacy">Your information is never shared or sold.</div>
+  </form>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <span>Kene Ezeoke &mdash; Seattle, WA</span>
-  <span>&copy; 2026</span>
+  Kene Ezeoke &mdash; Seattle, WA &copy; 2026
 </footer>
 
 <script>
-  function observeFadeIns() {
-    const els = document.querySelectorAll('.fade-in:not(.visible)');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          obs.unobserve(e.target);
+  // Contact form handling
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      try {
+        const resp = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (resp.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
         }
-      });
-    }, { threshold: 0.08 });
-    els.forEach(el => obs.observe(el));
+      } catch(err) {
+        // fallback: just submit normally
+        form.submit();
+      }
+    });
   }
-
-  observeFadeIns();
-
-  document.querySelectorAll('.company-logo').forEach(img => {
-    img.addEventListener('error', function() {
-      const span = document.createElement('span');
-      span.textContent = this.alt;
-      span.style.cssText = 'font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--ink);';
-      this.replaceWith(span);
-    });
-  });
-
-  const form = document.getElementById('contact-form');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-    if (res.ok) {
-      form.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    }
-  });
 </script>
 </body>
 </html>
