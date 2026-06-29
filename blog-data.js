@@ -40,7 +40,7 @@ var blogData = [
   {
     type: "post",
     date: "June 2026",
-    title: "Our customer insights program was almost DOA because it couldn\u2019t scale. Here\u2019s how I fixed that.",
+    title: "Our customer insights program was almost sunsetted because it couldn\u2019t scale. Here\u2019s how I fixed that.",
     desc: "Leadership wanted to know what customers were experiencing but not at the expense of efficiency and scale and limited accuracy. The same dataset produced wildly different results depending on how you tuned the keywords.",
     url: "blog/voc-classification.html"
   },
