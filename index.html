@@ -3,761 +3,415 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kene Ezeoke — Builder, Operator, Program Manager</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Kene Ezeoke — Builder, Operator, Program Leader</title>
+<meta name="description" content="I solve decision-quality problems at scale. 8+ years across Amazon, Apple, Google, F5, and a NYC startup. Chicago Booth MBA.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy: #0f1c2e;
-    --navy-mid: #1a2e45;
-    --teal: #00b894;
-    --teal-light: #e6f9f4;
-    --teal-mid: #00a381;
-    --sand: #f7f4ef;
-    --sand-dark: #ede9e1;
-    --ink: #1a1a2e;
-    --ink-mid: #3d3d5c;
-    --ink-light: #6b7280;
-    --white: #ffffff;
-    --border: rgba(15,28,46,0.1);
-  }
+:root {
+  --bg: #f6f1eb;
+  --bg-card: #faf8f4;
+  --bg-hover: #f3efe8;
+  --text: #1c1814;
+  --text-mid: #4a4238;
+  --text-sec: #6b6058;
+  --text-muted: #8a7e6a;
+  --accent: #b5502a;
+  --accent-hover: #8b3a18;
+  --border: #ddd5c5;
+  --border-light: #ece6dd;
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--sand);
-    color: var(--ink);
-    line-height: 1.6;
-    font-size: 15px;
-  }
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* NAV */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(247,244,239,0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 56px;
-  }
-  .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    color: var(--navy);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 13px; font-weight: 500; color: var(--ink-mid);
-    text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--teal); }
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(246,241,235,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+  transition: border-color 0.3s;
+}
+.nav.scrolled { border-bottom-color: var(--border); }
+.nav-name {
+  font-family: 'Fraunces', serif;
+  font-size: 16px; font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a {
+  font-size: 12px; font-weight: 500; color: var(--text-muted);
+  text-decoration: none; transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 1px; background: var(--accent);
+  transition: width 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.active::after { width: 100%; }
 
-  /* HERO */
-  .hero {
-    background: var(--navy);
-    padding: 5rem 2rem 4rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 30% 20%, rgba(0,184,148,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 80%, rgba(0,184,148,0.05) 0%, transparent 50%);
-    pointer-events: none;
-  }
-  .hero-location {
-    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--teal); margin-bottom: 1rem; font-weight: 500;
-  }
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    color: var(--white);
-    margin-bottom: 0.5rem;
-    line-height: 1.15;
-  }
-  .hero-subtitle {
-    font-size: 1.1rem; color: rgba(255,255,255,0.7);
-    margin-bottom: 1.5rem; font-weight: 300;
-  }
-  .hero-blurb {
-    max-width: 680px; margin: 0 auto 2rem;
-    font-size: 0.95rem; color: rgba(255,255,255,0.55);
-    line-height: 1.7;
-  }
-  .hero-buttons {
-    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-    margin-bottom: 3rem;
-  }
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    padding: 0.7rem 1.6rem; border-radius: 6px;
-    font-size: 14px; font-weight: 500; text-decoration: none;
-    transition: all 0.25s;
-  }
-  .btn-primary {
-    background: var(--teal); color: var(--white);
-  }
-  .btn-primary:hover { background: var(--teal-mid); }
-  .btn-outline {
-    border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.8);
-    background: transparent;
-  }
-  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+/* HERO */
+.hero { padding: 4rem 2rem 1rem; max-width: 800px; margin: 0 auto; }
+.hero-line {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  color: var(--text); line-height: 1.2;
+  opacity: 0; transform: translateY(20px);
+}
+.hero-line.visible {
+  opacity: 1; transform: translateY(0);
+  transition: all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
 
-  /* LOGO STRIP */
-  .logo-strip {
-    background: var(--navy-mid);
-    padding: 2rem;
-    text-align: center;
-  }
-  .logo-strip-label {
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(255,255,255,0.35); margin-bottom: 1.2rem; font-weight: 500;
-  }
-  .logos {
-    display: flex; justify-content: center; align-items: center;
-    gap: 2.5rem; flex-wrap: wrap;
-  }
-  .logos img {
-    height: 28px; opacity: 0.7; filter: brightness(0) invert(1);
-    transition: opacity 0.2s;
-  }
-  .logos img:hover { opacity: 1; }
+/* LOGO STRIP */
+.logo-strip {
+  padding: 1.2rem 2rem 2.5rem;
+  max-width: 800px; margin: 0 auto;
+  opacity: 0; transform: translateY(10px);
+}
+.logo-strip.visible {
+  opacity: 1; transform: translateY(0);
+  transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94) 0.35s;
+}
+.logo-strip-label {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 1rem; font-weight: 500;
+}
+.logo-row {
+  display: flex; align-items: center; gap: 1.8rem; flex-wrap: wrap;
+}
+.logo-item {
+  display: flex; align-items: center;
+  text-decoration: none; transition: all 0.25s;
+  position: relative;
+}
+.logo-item img {
+  height: 24px; object-fit: contain;
+  filter: grayscale(100%) opacity(0.5);
+  transition: all 0.3s;
+}
+.logo-item:hover img {
+  filter: grayscale(0%) opacity(1);
+}
+.logo-hint {
+  position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; color: var(--accent); white-space: nowrap;
+  opacity: 0; transition: opacity 0.2s; pointer-events: none;
+}
+.logo-item:hover .logo-hint { opacity: 1; }
+.logo-sep {
+  width: 1px; height: 18px; background: var(--border); flex-shrink: 0;
+}
+.logo-booth {
+  font-size: 12px; color: var(--text-muted);
+}
 
-  /* STATS */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .stat {
-    background: var(--sand);
-    padding: 1.8rem 1.5rem;
-    text-align: center;
-  }
-  .stat-value {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.8rem; color: var(--teal);
-    margin-bottom: 0.3rem;
-  }
-  .stat-label {
-    font-size: 12px; color: var(--ink-light);
-    letter-spacing: 0.02em;
-  }
+/* SECTION LABELS */
+.section-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--text-muted); font-weight: 500;
+  max-width: 800px; margin: 0 auto;
+  padding: 0 2rem; margin-bottom: 1rem;
+  opacity: 0; transform: translateX(-10px);
+}
+.section-label.visible {
+  opacity: 1; transform: translateX(0);
+  transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
 
-  /* EXPERIENCE */
-  .section-header {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.8rem;
-    color: var(--navy);
-    text-align: center;
-    margin: 1.8rem 0 1.2rem;
-  }
-  .experience {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 2rem 1.8rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .role-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    transition: box-shadow 0.2s;
-    overflow: hidden;
-  }
-  .role-card:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
-  }
-  .role-toggle {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.2rem;
-    padding: 2rem 2.5rem;
-    cursor: pointer;
-    user-select: none;
-  }
-  .role-logo {
-    width: 44px; height: 44px;
-    object-fit: contain;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .role-meta { flex: 1; }
-  .role-title {
-    font-weight: 600; font-size: 1.05rem; color: var(--navy);
-    margin-bottom: 0.15rem;
-  }
-  .role-company-line {
-    font-size: 0.85rem; color: var(--ink-light);
-  }
-  .role-dates {
-    font-size: 0.82rem; color: var(--ink-light);
-    text-align: right;
-    white-space: nowrap;
-  }
-  .role-chevron {
-    font-size: 1.2rem;
-    color: var(--ink-light);
-    transition: transform 0.3s ease;
-    margin-top: 4px;
-    flex-shrink: 0;
-  }
-  .role-card:not(.collapsed) .role-chevron {
-    transform: rotate(180deg);
-  }
-  .role-collapsible {
-    padding: 0 2.5rem 2rem;
-    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
-    max-height: 2000px;
-    opacity: 1;
-    overflow: hidden;
-  }
-  .role-card.collapsed .role-collapsible {
-    max-height: 0;
-    opacity: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .role-scope {
-    font-size: 0.85rem; color: var(--teal-mid);
-    font-weight: 500;
-    margin-bottom: 1rem;
-    padding-left: 56px;
-  }
-  .role-bullets {
-    list-style: none;
-    padding-left: 56px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-  }
-  .role-bullets li {
-    position: relative;
-    padding-left: 1rem;
-    font-size: 0.9rem;
-    color: var(--ink-mid);
-    line-height: 1.65;
-  }
-  .role-bullets li::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0.55rem;
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: var(--teal);
-  }
+/* CASE STUDY CARDS */
+.card-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.8rem; max-width: 800px; margin: 0 auto 2.5rem;
+  padding: 0 2rem;
+}
+.card {
+  background: var(--bg-card);
+  border-radius: 8px; border: 1px solid var(--border);
+  padding: 1.25rem 1.4rem;
+  cursor: pointer; text-decoration: none; display: block;
+  opacity: 0; transform: translateY(20px);
+  transition: transform 0.2s, border-color 0.2s;
+  position: relative; overflow: hidden;
+}
+.card.visible { opacity: 1; transform: translateY(0); }
+.card::before {
+  content: ''; position: absolute; left: 0; top: 0;
+  width: 3px; height: 0; background: var(--accent);
+  transition: height 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+  border-radius: 0 2px 2px 0;
+}
+.card:hover { border-color: #c4b5a2; transform: translateY(-2px); }
+.card:hover::before { height: 100%; }
+.card-date {
+  font-size: 10px; color: var(--text-muted); margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+}
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 15px; color: var(--text); line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+.card-desc {
+  font-size: 12px; color: var(--text-sec); line-height: 1.6;
+}
+.card-cta {
+  font-size: 11px; color: var(--accent); margin-top: 0.8rem;
+  display: flex; align-items: center; gap: 0.3rem;
+}
+.card-cta-arrow {
+  display: inline-block; transition: transform 0.2s;
+}
+.card:hover .card-cta-arrow { transform: translateX(3px); }
 
-  /* TOOLS */
-  .tools-section {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 2rem 1.8rem;
-  }
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.2rem;
-  }
-  .tool-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-  .tool-card-title {
-    font-weight: 600; font-size: 0.85rem;
-    color: var(--navy);
-    margin-bottom: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .tool-tags {
-    display: flex; flex-wrap: wrap; gap: 0.4rem;
-  }
-  .tool-tag {
-    font-size: 12px;
-    padding: 0.25rem 0.6rem;
-    border-radius: 4px;
-    background: var(--sand);
-    color: var(--ink-mid);
-    border: 1px solid var(--border);
-  }
+/* BLOG LIST */
+.blog-section {
+  max-width: 800px; margin: 0 auto 2.5rem; padding: 0 2rem;
+}
+.blog-item {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 0.75rem 0; border-bottom: 1px solid var(--border-light);
+  cursor: pointer; text-decoration: none;
+  opacity: 0; transform: translateY(12px);
+}
+.blog-item.visible { opacity: 1; transform: translateY(0); }
+.blog-title {
+  font-family: 'Fraunces', serif;
+  font-size: 14px; color: var(--text); transition: color 0.2s;
+  line-height: 1.4; padding-right: 1rem;
+}
+.blog-item:hover .blog-title { color: var(--accent); }
+.blog-meta {
+  display: flex; align-items: baseline; flex-shrink: 0;
+}
+.blog-date {
+  font-size: 10px; color: var(--text-muted); min-width: 50px; text-align: right;
+}
+.blog-arrow {
+  font-size: 12px; color: var(--accent);
+  opacity: 0; transform: translateX(-4px);
+  transition: all 0.2s; margin-left: 0.5rem;
+}
+.blog-item:hover .blog-arrow { opacity: 1; transform: translateX(0); }
 
-  /* EDUCATION */
-  .education-section {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 2rem 1.8rem;
-  }
-  .edu-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.2rem;
-  }
-  .edu-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1.2rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-  .edu-logo {
-    width: 44px; height: 44px;
-    object-fit: contain;
-    flex-shrink: 0;
-  }
-  .edu-name {
-    font-weight: 600; font-size: 0.95rem; color: var(--navy);
-    margin-bottom: 0.1rem;
-  }
-  .edu-detail {
-    font-size: 0.82rem; color: var(--ink-light);
-  }
+/* FOOTER */
+.footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 800px; margin: 0 auto;
+}
+.footer-text { font-size: 11px; color: var(--text-muted); }
+.footer-cta {
+  font-size: 12px; color: var(--accent);
+  text-decoration: none; display: flex; align-items: center; gap: 0.3rem;
+}
+.footer-cta:hover { color: var(--accent-hover); }
 
-  /* CONTACT */
-  .contact-section {
-    background: var(--navy);
-    padding: 4rem 2rem;
-    text-align: center;
-  }
-  .contact-section h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.8rem;
-    color: var(--white);
-    margin-bottom: 0.8rem;
-  }
-  .contact-section p {
-    color: rgba(255,255,255,0.6);
-    font-size: 0.95rem;
-    max-width: 500px;
-    margin: 0 auto 2rem;
-  }
-  .contact-form {
-    max-width: 480px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 6px;
-    background: rgba(255,255,255,0.06);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    transition: border-color 0.2s;
-    outline: none;
-  }
-  .contact-form input::placeholder,
-  .contact-form textarea::placeholder {
-    color: rgba(255,255,255,0.35);
-  }
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    border-color: var(--teal);
-  }
-  .contact-form textarea {
-    min-height: 120px;
-    resize: vertical;
-  }
-  .contact-form .btn-submit {
-    background: var(--teal);
-    color: var(--white);
-    border: none;
-    padding: 0.8rem 2rem;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: background 0.2s;
-  }
-  .contact-form .btn-submit:hover { background: var(--teal-mid); }
-  .contact-privacy {
-    font-size: 11px;
-    color: rgba(255,255,255,0.3);
-    margin-top: 0.5rem;
-  }
-  .form-success {
-    display: none;
-    color: var(--teal);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
+/* MOBILE */
+@media (max-width: 640px) {
+  .nav { padding: 0 1.2rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 11px; }
+  .hero { padding: 2.5rem 1.2rem 0.5rem; }
+  .logo-strip { padding: 1rem 1.2rem 2rem; }
+  .logo-row { gap: 1.2rem; }
+  .logo-item img { height: 20px; }
+  .logo-sep { display: none; }
+  .section-label { padding: 0 1.2rem; }
+  .card-grid { grid-template-columns: 1fr; padding: 0 1.2rem; }
+  .blog-section { padding: 0 1.2rem; }
+  .footer { padding: 1.5rem 1.2rem; }
+}
 
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 12px;
-    color: var(--ink-light);
-    border-top: 1px solid var(--border);
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .hero-line, .logo-strip, .section-label, .card, .blog-item {
+    opacity: 1 !important; transform: none !important;
+    transition: none !important;
   }
-
-  /* MOBILE */
-  @media (max-width: 640px) {
-    nav { padding: 0 1rem; }
-    .nav-links { gap: 1rem; }
-    .nav-links a { font-size: 11px; }
-    .hero { padding: 3rem 1.2rem 2.5rem; }
-    .hero h1 { font-size: 2rem; }
-    .role-toggle { flex-wrap: wrap; gap: 0.8rem; padding: 1.5rem; }
-    .role-dates { text-align: left; }
-    .role-scope, .role-bullets { padding-left: 0; }
-    .role-collapsible { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .logos { gap: 1.5rem; }
-    .logos img { height: 22px; }
-    .edu-cards { grid-template-columns: 1fr; }
-  }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">Kene Ezeoke</a>
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-name">Kene Ezeoke</a>
   <ul class="nav-links">
-    <li><a href="#resume">Resume</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="https://www.kene.work/resume.pdf">Download PDF</a></li>
+    <li><a href="index.html" class="active">Work</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="about.html#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-location">Seattle, WA</div>
-  <h1>Kene Ezeoke</h1>
-  <div class="hero-subtitle">0-to-1 Builder, Operator, Program Leader</div>
-  <p class="hero-blurb">
-    Joined a NYC startup as employee #13, closed the deals that proved product-market fit, built the team from 1 to 6, and helped attract investment from Marc Benioff. Since then, 8+ years across Amazon, Apple, Google, and F5 doing the same thing in different contexts: walking into ambiguity, building what doesn't exist, and making the results visible to the people who matter. I work best when the problem isn't fully defined yet. Chicago Booth MBA. Most recently, designing and deploying production ML models (forecasting and NLP classification) solo, with AI as the build team.
-  </p>
-  <div class="hero-buttons">
-    <a href="#resume" class="btn btn-primary">View Resume &#8595;</a>
-    <a href="#contact" class="btn btn-outline">Get in Touch</a>
-    <a href="https://www.kene.work/resume.pdf" class="btn btn-outline">Download PDF &#8595;</a>
-  </div>
+  <div class="hero-line" id="hero1">I solve decision-quality</div>
+  <div class="hero-line" id="hero2">problems at scale.</div>
 </section>
 
-<!-- LOGO STRIP -->
-<div class="logo-strip">
+<div class="logo-strip" id="logoStrip">
   <div class="logo-strip-label">Where I've built</div>
-  <div class="logos">
-    <img src="https://www.kene.work/logo-amazon.png" alt="Amazon">
-    <img src="https://www.kene.work/logo-apple.png" alt="Apple">
-    <img src="https://www.kene.work/logo-f5.png" alt="F5 Networks">
-    <img src="https://www.kene.work/logo-google.png" alt="Google">
-    <img src="https://www.kene.work/logo-silverline.png" alt="Silverline">
+  <div class="logo-row">
+    <a class="logo-item" href="about.html#role-amazon-current">
+      <img src="logo-amazon.png" alt="Amazon">
+      <span class="logo-hint">Sr. PM, 2024–now</span>
+    </a>
+    <div class="logo-sep"></div>
+    <a class="logo-item" href="about.html#role-f5">
+      <img src="logo-f5.png" alt="F5 Networks">
+      <span class="logo-hint">Sr. PM, 2022–23</span>
+    </a>
+    <div class="logo-sep"></div>
+    <a class="logo-item" href="about.html#role-apple">
+      <img src="logo-apple.png" alt="Apple">
+      <span class="logo-hint">Ops, 2021–22</span>
+    </a>
+    <div class="logo-sep"></div>
+    <a class="logo-item" href="about.html#role-google">
+      <img src="logo-google.png" alt="Google">
+      <span class="logo-hint">Intern, 2020</span>
+    </a>
+    <div class="logo-sep"></div>
+    <a class="logo-item" href="about.html#role-silverline">
+      <img src="logo-silverline.png" alt="Silverline">
+      <span class="logo-hint">Employee #13</span>
+    </a>
+    <div class="logo-sep"></div>
+    <span class="logo-booth">Chicago Booth MBA</span>
   </div>
 </div>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <div class="stat-value">8+</div>
-    <div class="stat-label">Years in Big Tech</div>
-  </div>
-  <div class="stat">
-    <div class="stat-value">$45MM</div>
-    <div class="stat-label">Revenue driven at F5</div>
-  </div>
-  <div class="stat">
-    <div class="stat-value">$500MM</div>
-    <div class="stat-label">Revenue managed at Apple</div>
-  </div>
-  <div class="stat">
-    <div class="stat-value">40%</div>
-    <div class="stat-label">YoY Revenue growth at Amazon</div>
-  </div>
-  <div class="stat">
-    <div class="stat-value">50%</div>
-    <div class="stat-label">Faster launch cycles</div>
-  </div>
+<div class="section-label" id="workLabel">Selected work</div>
+<div class="card-grid">
+  <a class="card" id="card1" href="#">
+    <div class="card-date">Amazon · 2026</div>
+    <div class="card-title">Forecasting model that ended the weekly debate</div>
+    <div class="card-desc">CatBoost model replacing subjective judgment in VP metric reviews. Three iterations driven by real-world failure, validated with Finance, adopted across multiple teams.</div>
+    <div class="card-cta">Read case study <span class="card-cta-arrow">&rarr;</span></div>
+  </a>
+  <a class="card" id="card2" href="#">
+    <div class="card-date">Amazon · 2026</div>
+    <div class="card-title">Customer insight engine that survived director scrutiny</div>
+    <div class="card-desc">Hybrid ML pipeline for VOC analysis. Cut unclassified contacts from 22% to 9%. Drove product redesigns and measurable reductions in cancellations and returns.</div>
+    <div class="card-cta">Read case study <span class="card-cta-arrow">&rarr;</span></div>
+  </a>
+  <a class="card" id="card3" href="#">
+    <div class="card-date">Amazon · 2025–26</div>
+    <div class="card-title">AI reporting system leadership stopped rewriting</div>
+    <div class="card-desc">LLM-as-judge evaluation loop drove AI-generated executive briefs from 2.6 to 4.1 quality over 11 weeks. Now in production for VP-level reviews.</div>
+    <div class="card-cta">Read case study <span class="card-cta-arrow">&rarr;</span></div>
+  </a>
+  <a class="card" id="card4" href="#">
+    <div class="card-date">F5 · 2022</div>
+    <div class="card-title">Stage-gate redesign across a 100-person org</div>
+    <div class="card-desc">Reduced launch cycle time by 20%. First product through shipped 50% faster than industry standard. Gained CPO sign-off before rollout.</div>
+    <div class="card-cta">Read case study <span class="card-cta-arrow">&rarr;</span></div>
+  </a>
 </div>
 
-<!-- EXPERIENCE -->
-<h2 class="section-header" id="resume">Experience</h2>
-<div class="experience">
-
-  <!-- Amazon Current (expanded by default) -->
-  <div class="role-card" id="card-amazon-current">
-    <div class="role-toggle" onclick="toggleCard('card-amazon-current')">
-      <a href="https://www.amazon.com"><img src="https://www.kene.work/logo-amazon.png" alt="Amazon" class="role-logo"></a>
-      <div class="role-meta">
-        <div class="role-title">Sr Program Manager</div>
-        <div class="role-company-line">Amazon</div>
-      </div>
-      <div class="role-dates">Jul 2024 &ndash; Present<br>Seattle, WA</div>
-      <div class="role-chevron">&#9662;</div>
+<div class="section-label" id="blogLabel">Writing</div>
+<div class="blog-section">
+  <a class="blog-item" id="blog1" href="#">
+    <div class="blog-title">Leadership was wasting hours debating whether KPI movements mattered</div>
+    <div class="blog-meta">
+      <div class="blog-date">Jun 2026</div>
+      <span class="blog-arrow">&rarr;</span>
     </div>
-    <div class="role-collapsible">
-      <div class="role-scope">Business performance and executive reporting | Add to Delivery</div>
-      <ul class="role-bullets">
-        <li>Built the business performance metrics program from scratch, standardizing reporting across 3 orgs and 4 partner teams. Program insights now reach Amazon board meetings and earnings calls.</li>
-        <li>Support the annual goal-setting process for Add to Delivery, contributing performance analysis and drafting sections of OP1/OP2 goal documents. Own the ongoing tracking cadence through monthly goal updates that roll into VP and S-team reporting, coordinate submission timelines across senior managers, and support QBRs with metrics reviews and performance callouts.</li>
-        <li>Designed and launched a GenAI reporting automation system using RAG architecture, writing the business logic and context engineering framework that enables LLMs to interpret performance data across multiple internal data sources. Built an LLM-as-a-judge AI scorecard to track quality week over week. Delivers weekly automated dashboards now used in VP-level reviews.</li>
-        <li>Built and deployed a CatBoost forecasting model for weekly metric noise classification, enabling the WBR process to automatically distinguish normal fluctuations from signals requiring investigation. Selected by cross-team consensus over competing approaches.</li>
-        <li>Built the VOC program from scratch, including a custom API tool that cut transcript collection from 4-6 hours to 15 minutes and a hybrid ML classification pipeline (sentence-transformer embeddings + keyword disambiguation) that reduced unclassified contacts from 22% to 9% and powers leadership MBR reporting. Analysis surfaced the duplicate order pattern that drove a product redesign and a new launch criteria metric. Program scales to 6 international markets with no added headcount or engineering resources.</li>
-        <li>Authored monthly executive business performance narratives analyzing business trends and metric movements, translating insights into prioritization recommendations. Drove product reprioritization, resulting in 1.6% reduction in customer cancellations and 1.2% reduction in return rates.</li>
-      </ul>
+  </a>
+  <a class="blog-item" id="blog2" href="#">
+    <div class="blog-title">Our customer insights were indefensible at the director level</div>
+    <div class="blog-meta">
+      <div class="blog-date">Jun 2026</div>
+      <span class="blog-arrow">&rarr;</span>
     </div>
-  </div>
-
-  <!-- F5 (collapsed) -->
-  <div class="role-card collapsed" id="card-f5">
-    <div class="role-toggle" onclick="toggleCard('card-f5')">
-      <a href="https://www.f5.com"><img src="https://www.kene.work/logo-f5.png" alt="F5 Networks" class="role-logo"></a>
-      <div class="role-meta">
-        <div class="role-title">Senior Program Manager, Business Operations</div>
-        <div class="role-company-line">F5 Networks</div>
-      </div>
-      <div class="role-dates">Jan 2022 &ndash; Nov 2023<br>Seattle, WA</div>
-      <div class="role-chevron">&#9662;</div>
+  </a>
+  <a class="blog-item" id="blog3" href="#">
+    <div class="blog-title">How I turned an AI system leadership couldn't trust into one they stopped rewriting</div>
+    <div class="blog-meta">
+      <div class="blog-date">Jul 2026</div>
+      <span class="blog-arrow">&rarr;</span>
     </div>
-    <div class="role-collapsible">
-      <div class="role-scope">Right-hand to Sr Director of Operations | PMO, product launches, process transformation</div>
-      <ul class="role-bullets">
-        <li>Redesigned the stage-gate process governing launches across a 100+ person organization spanning Product, Engineering, PMM, Support, Marketing, and SKU Management. Reduced launch cycle time by 20% by eliminating redundant gates, shifting ownership upfront, and building transparency mechanisms that kept supporting teams aligned without blocking delivery. Gained buy-in from Product VPs and the CPO before rolling out across the org.</li>
-        <li>Led the top-priority product launch through the new stage-gate process, shipping 50% faster than industry standard and delivering $45MM in annual revenue (+6% YoY) by driving 6 cross-functional teams through development, launch readiness, and GTM.</li>
-        <li>Drove the initial phases of F5's first outsourced hardware manufacturing initiative, owning partner identification, contract negotiation, and cross-functional coordination through v1 software testing with Flextronics and Dell.</li>
-        <li>Identified a VP-level problem with beta customer drop-off and a parallel sales team need for a customer pitch around delayed software, and solved both with one program. Redesigned the beta onboarding process to enable self-service, cutting onboarding time from 3-4 weeks to 1 week, and grew participation 10x including 2 new preorder conversions.</li>
-        <li>Reduced cycle time for OEM and partner procurement approvals by 50% by streamlining the approvals process and building a repeatable workflow for recurring partner payments.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Apple (collapsed) -->
-  <div class="role-card collapsed" id="card-apple">
-    <div class="role-toggle" onclick="toggleCard('card-apple')">
-      <a href="https://www.apple.com"><img src="https://www.kene.work/logo-apple.png" alt="Apple" class="role-logo"></a>
-      <div class="role-meta">
-        <div class="role-title">Channel Partner Operations Manager</div>
-        <div class="role-company-line">Apple</div>
-      </div>
-      <div class="role-dates">Jun 2021 &ndash; Jan 2022<br>Austin, TX</div>
-      <div class="role-chevron">&#9662;</div>
-    </div>
-    <div class="role-collapsible">
-      <div class="role-scope">North America channel partner operations</div>
-      <ul class="role-bullets">
-        <li>Managed $500MM in North America revenue through operational planning, forecasting, and supply chain risk mitigation across Apple's retailer and distributor network with no inventory delays.</li>
-        <li>Built a first-of-its-kind internal backlog analysis tool using SQL and Excel macros to surface perishable order risk invisible in existing reporting, and drove $10MM+ in order recovery across Apple's retailer and distributor network.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Google (collapsed) -->
-  <div class="role-card collapsed" id="card-google">
-    <div class="role-toggle" onclick="toggleCard('card-google')">
-      <a href="https://www.google.com"><img src="https://www.kene.work/logo-google.png" alt="Google" class="role-logo"></a>
-      <div class="role-meta">
-        <div class="role-title">Product Operations Manager</div>
-        <div class="role-company-line">Google (MBA Intern)</div>
-      </div>
-      <div class="role-dates">Jun 2020 &ndash; Sep 2020<br>Mountain View, CA</div>
-      <div class="role-chevron">&#9662;</div>
-    </div>
-    <div class="role-collapsible">
-      <div class="role-scope">Subscriber retention and CX team integration</div>
-      <ul class="role-bullets">
-        <li>Identified an existing StratOps churn model and applied it to proactively surface at-risk subscribers, partnering with marketing and support to implement retention plans that drove a 60% increase in subscriber engagement.</li>
-        <li>Designed the process and org restructuring recommendations to integrate 3 product CX teams, projecting a 20% increase in cross-selling revenue through shared infrastructure and reduced overhead.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Amazon Previous (collapsed) -->
-  <div class="role-card collapsed" id="card-amazon-prev">
-    <div class="role-toggle" onclick="toggleCard('card-amazon-prev')">
-      <a href="https://www.amazon.com"><img src="https://www.kene.work/logo-amazon.png" alt="Amazon" class="role-logo"></a>
-      <div class="role-meta">
-        <div class="role-title">Launch Program Manager</div>
-        <div class="role-company-line">Amazon</div>
-      </div>
-      <div class="role-dates">Aug 2015 &ndash; Aug 2019<br>Seattle, WA</div>
-      <div class="role-chevron">&#9662;</div>
-    </div>
-    <div class="role-collapsible">
-      <div class="role-scope">International expansion and marketplace partner operations</div>
-      <ul class="role-bullets">
-        <li>Delivered 40% YoY revenue growth with 70% of allocated budget across 8 countries in the US, EU, and APAC by shifting from mass content acquisition to a targeted strategy, using BI analysis to identify which Prime Reading titles drove net positive outcomes for both readers and authors.</li>
-        <li>Scaled third-party restaurant partner onboarding 8x to support Prime Now expansion into 50+ US cities by developing geographic launch plans, streamlining onboarding processes, and introducing automation.</li>
-        <li>Reduced weekly effort by 27% for a 200-person sales team by identifying workflow inefficiencies and leading CRM improvements from concept to launch.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Silverline (collapsed) -->
-  <div class="role-card collapsed" id="card-silverline">
-    <div class="role-toggle" onclick="toggleCard('card-silverline')">
-      <a href="https://silverlinecrm.com/calendaranything/"><img src="https://www.kene.work/logo-silverline.png" alt="Silverline" class="role-logo"></a>
-      <div class="role-meta">
-        <div class="role-title">Sales Operations Manager</div>
-        <div class="role-company-line">Silverline (now part of Mphasis) &middot; Employee #13</div>
-      </div>
-      <div class="role-dates">Aug 2011 &ndash; Aug 2015<br>New York, NY</div>
-      <div class="role-chevron">&#9662;</div>
-    </div>
-    <div class="role-collapsible">
-      <div class="role-scope">Founding team member | Product viability and customer operations</div>
-      <ul class="role-bullets">
-        <li>Closed the initial deals that proved product-market fit, directly funding the first PM hire and growing the product into a multi-million dollar business line.</li>
-        <li>Built a custom renewal system using account IDs and Stripe payment integration, giving enterprise clients a one-click renewal flow that drove 85%+ renewal rates against a 75% goal.</li>
-        <li>Designed and launched two Salesforce Service Cloud customer support portals, including case prioritization logic, assignment flows, and all support documentation. Automated reporting on case resolution cut issue resolution time by 48 hours.</li>
-        <li>Optimized Salesforce CRM workflows across the sales team, driving 27% quota overperformance.</li>
-        <li>Built and led the team from 1 to 6 people, helping attract investment from Marc Benioff to expand the business further.</li>
-      </ul>
-    </div>
-  </div>
-
+  </a>
 </div>
 
-<!-- TOOLS -->
-<h2 class="section-header">Tools & Expertise</h2>
-<div class="tools-section">
-  <div class="tools-grid">
-    <div class="tool-card">
-      <div class="tool-card-title">AI & Automation</div>
-      <div class="tool-tags">
-        <span class="tool-tag">NLP / Text Classification</span>
-        <span class="tool-tag">Sentence-Transformer Embeddings</span>
-        <span class="tool-tag">Time Series Forecasting</span>
-        <span class="tool-tag">Prophet</span>
-        <span class="tool-tag">Chronos 2</span>
-        <span class="tool-tag">CatBoost</span>
-        <span class="tool-tag">RAG</span>
-        <span class="tool-tag">LLM Evaluation & Scoring</span>
-        <span class="tool-tag">Context Engineering</span>
-        <span class="tool-tag">Prompt Engineering</span>
-        <span class="tool-tag">AI-Assisted Development</span>
-        <span class="tool-tag">Workflow Automation</span>
-      </div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-card-title">Data & Analysis</div>
-      <div class="tool-tags">
-        <span class="tool-tag">SQL</span>
-        <span class="tool-tag">Advanced Excel</span>
-        <span class="tool-tag">Tableau</span>
-        <span class="tool-tag">QuickSight</span>
-        <span class="tool-tag">LLM-Powered Dashboards</span>
-      </div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-card-title">Program Management</div>
-      <div class="tool-tags">
-        <span class="tool-tag">Lean Six Sigma Green Belt</span>
-        <span class="tool-tag">Stage-Gate / PDLC</span>
-        <span class="tool-tag">LucidChart</span>
-        <span class="tool-tag">Miro</span>
-        <span class="tool-tag">Mural</span>
-        <span class="tool-tag">Smartsheet</span>
-        <span class="tool-tag">Asana</span>
-        <span class="tool-tag">Confluence</span>
-        <span class="tool-tag">SharePoint</span>
-      </div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-card-title">CRM & Customer Experience</div>
-      <div class="tool-tags">
-        <span class="tool-tag">Salesforce Sales Cloud</span>
-        <span class="tool-tag">Salesforce Service Cloud</span>
-        <span class="tool-tag">HubSpot</span>
-        <span class="tool-tag">Qualtrics</span>
-      </div>
-    </div>
-  </div>
+<div class="footer">
+  <div class="footer-text">kene.work &middot; &copy; 2026</div>
+  <a href="about.html#contact" class="footer-cta">Get in touch &rarr;</a>
 </div>
-
-<!-- EDUCATION -->
-<h2 class="section-header">Education</h2>
-<div class="education-section">
-  <div class="edu-cards">
-    <div class="edu-card">
-      <img src="https://www.kene.work/logo-booth.png" alt="Chicago Booth" class="edu-logo">
-      <div>
-        <div class="edu-name">Chicago Booth</div>
-        <div class="edu-detail">MBA</div>
-      </div>
-    </div>
-    <div class="edu-card">
-      <img src="https://www.kene.work/logo-stonybrook.png" alt="Stony Brook University" class="edu-logo">
-      <div>
-        <div class="edu-name">Stony Brook University</div>
-        <div class="edu-detail">BSc</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <h2>Let's connect.</h2>
-  <p>If you're working on something interesting and think my background is a fit, I'd love to hear about it.</p>
-  <div class="form-success" id="formSuccess">Your message was sent. I'll be in touch shortly.</div>
-  <form class="contact-form" id="contactForm" action="https://formspree.io/f/mbdqoarz" method="POST">
-    <input type="text" name="name" placeholder="Your name" required>
-    <input type="text" name="company" placeholder="Company">
-    <input type="email" name="email" placeholder="Email" required>
-    <textarea name="message" placeholder="Message" required></textarea>
-    <button type="submit" class="btn-submit">Send Message &rarr;</button>
-    <div class="contact-privacy">Your information is never shared or sold.</div>
-  </form>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  Kene Ezeoke &mdash; Seattle, WA &copy; 2026
-</footer>
 
 <script>
-  function toggleCard(id) {
-    document.getElementById(id).classList.toggle('collapsed');
-  }
+// Nav scroll border
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+});
 
-  // Contact form handling
-  var form = document.getElementById('contactForm');
-  var success = document.getElementById('formSuccess');
-  if (form) {
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      try {
-        var resp = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (resp.ok) {
-          form.style.display = 'none';
-          success.style.display = 'block';
-        }
-      } catch(err) {
-        form.submit();
-      }
-    });
-  }
+// Hero entrance
+setTimeout(function() {
+  var h1 = document.getElementById('hero1');
+  h1.style.transition = 'all 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
+  h1.classList.add('visible');
+  setTimeout(function() {
+    var h2 = document.getElementById('hero2');
+    h2.style.transition = 'all 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
+    h2.classList.add('visible');
+  }, 150);
+  setTimeout(function() {
+    document.getElementById('logoStrip').classList.add('visible');
+  }, 400);
+}, 200);
+
+// Scroll reveal
+var revealItems = [
+  { el: 'workLabel', offset: 0 },
+  { el: 'card1', offset: 0 },
+  { el: 'card2', offset: 80 },
+  { el: 'card3', offset: 0 },
+  { el: 'card4', offset: 80 },
+  { el: 'blogLabel', offset: 0 },
+  { el: 'blog1', offset: 0 },
+  { el: 'blog2', offset: 100 },
+  { el: 'blog3', offset: 200 }
+];
+
+function checkReveal() {
+  var wh = window.innerHeight;
+  revealItems.forEach(function(item) {
+    var el = document.getElementById(item.el);
+    if (!el || el.classList.contains('visible')) return;
+    var rect = el.getBoundingClientRect();
+    if (rect.top < wh - 60) {
+      setTimeout(function() {
+        el.style.transition = 'all 0.5s cubic-bezier(0.25,0.46,0.45,0.94)';
+        el.classList.add('visible');
+      }, item.offset);
+    }
+  });
+}
+
+window.addEventListener('scroll', checkReveal);
+setTimeout(checkReveal, 500);
 </script>
+
 </body>
 </html>
