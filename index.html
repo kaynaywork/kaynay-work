@@ -6,7 +6,6 @@
 <title>Kene Ezeoke — Builder, Operator, Program Leader</title>
 <meta name="description" content="I solve decision-quality problems at scale. 8+ years across Amazon, Apple, Google, F5, and a NYC startup. Chicago Booth MBA.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
-<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -149,20 +148,10 @@ body {
   background: var(--bg-card);
   border-radius: 8px; border: 1px solid var(--border);
   padding: 1.25rem 1.4rem;
-  cursor: pointer; text-decoration: none; display: block;
   opacity: 0; transform: translateY(20px);
-  transition: transform 0.2s, border-color 0.2s;
   position: relative; overflow: hidden;
 }
 .card.visible { opacity: 1; transform: translateY(0); }
-.card::before {
-  content: ''; position: absolute; left: 0; top: 0;
-  width: 3px; height: 0; background: var(--accent);
-  transition: height 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
-  border-radius: 0 2px 2px 0;
-}
-.card:hover { border-color: #c4b5a2; transform: translateY(-2px); }
-.card:hover::before { height: 100%; }
 .card-date {
   font-size: 10px; color: var(--text-muted); margin-bottom: 0.6rem;
   letter-spacing: 0.02em;
@@ -175,18 +164,21 @@ body {
 .card-desc {
   font-size: 12px; color: var(--text-sec); line-height: 1.6;
 }
-.card-cta {
-  font-size: 11px; color: var(--accent); margin-top: 0.8rem;
-  display: flex; align-items: center; gap: 0.3rem;
-}
-.card-cta-arrow {
-  display: inline-block; transition: transform 0.2s;
-}
-.card:hover .card-cta-arrow { transform: translateX(3px); }
 
 /* BLOG LIST */
 .blog-section {
   max-width: 800px; margin: 0 auto 2.5rem; padding: 0 2rem;
+}
+.blog-note {
+  padding: 1rem 0; border-bottom: 1px solid var(--border-light);
+  opacity: 0; transform: translateY(12px);
+}
+.blog-note.visible { opacity: 1; transform: translateY(0); }
+.blog-note-text {
+  font-size: 13px; color: var(--text-mid); line-height: 1.7;
+}
+.blog-note-date {
+  font-size: 10px; color: var(--text-muted); margin-top: 0.5rem;
 }
 .blog-item {
   display: flex; justify-content: space-between; align-items: baseline;
@@ -213,6 +205,12 @@ body {
   transition: all 0.2s; margin-left: 0.5rem;
 }
 .blog-item:hover .blog-arrow { opacity: 1; transform: translateX(0); }
+.blog-all { padding: 1rem 0 0; }
+.blog-all-link {
+  font-size: 12px; color: var(--accent); text-decoration: none;
+  transition: color 0.2s;
+}
+.blog-all-link:hover { color: var(--accent-hover); }
 
 /* FOOTER */
 .footer {
@@ -304,55 +302,52 @@ body {
 
 <div class="section-label" id="workLabel">Selected work</div>
 <div class="card-grid">
-  <a class="card" id="card1" href="#">
+  <div class="card" id="card1">
     <div class="card-date">Amazon · 2026</div>
     <div class="card-title">Forecasting model that ended the weekly debate</div>
     <div class="card-desc">CatBoost model replacing subjective judgment in VP metric reviews. Three iterations driven by real-world failure, validated with Finance, adopted across multiple teams.</div>
-    <div class="card-cta">Read case study <span class="card-cta-arrow">&rarr;</span></div>
-  </a>
-  <a class="card" id="card2" href="#">
+  </div>
+  <div class="card" id="card2">
     <div class="card-date">Amazon · 2026</div>
     <div class="card-title">Customer insight engine that survived director scrutiny</div>
     <div class="card-desc">Hybrid ML pipeline for VOC analysis. Cut unclassified contacts from 22% to 9%. Drove product redesigns and measurable reductions in cancellations and returns.</div>
-    <div class="card-cta">Read case study <span class="card-cta-arrow">&rarr;</span></div>
-  </a>
-  <a class="card" id="card3" href="#">
-    <div class="card-date">Amazon · 2025–26</div>
-    <div class="card-title">AI reporting system leadership stopped rewriting</div>
-    <div class="card-desc">LLM-as-judge evaluation loop drove AI-generated executive briefs from 2.6 to 4.1 quality over 11 weeks. Now in production for VP-level reviews.</div>
-    <div class="card-cta">Read case study <span class="card-cta-arrow">&rarr;</span></div>
-  </a>
-  <a class="card" id="card4" href="#">
-    <div class="card-date">F5 · 2022</div>
-    <div class="card-title">Stage-gate redesign across a 100-person org</div>
-    <div class="card-desc">Reduced launch cycle time by 20%. First product through shipped 50% faster than industry standard. Gained CPO sign-off before rollout.</div>
-    <div class="card-cta">Read case study <span class="card-cta-arrow">&rarr;</span></div>
-  </a>
+  </div>
 </div>
 
-<div class="section-label" id="blogLabel">Writing</div>
+<div class="section-label" id="blogLabel">From the blog</div>
 <div class="blog-section">
-  <a class="blog-item" id="blog1" href="#">
+  <div class="blog-note" id="blog0">
+    <div class="blog-note-text">Another Prime Day in the books. First one live for the product I own metrics on. Built an in-event projection to give leadership a grounded read instead of gut feel. Flagged my own upper-bound risk up front, then walked it down when actuals came in. That's the job.</div>
+    <div class="blog-note-date">Jun 2026</div>
+  </div>
+  <a class="blog-item" id="blog1" href="blog/forecasting-model.html">
     <div class="blog-title">Leadership was wasting hours debating whether KPI movements mattered</div>
     <div class="blog-meta">
       <div class="blog-date">Jun 2026</div>
       <span class="blog-arrow">&rarr;</span>
     </div>
   </a>
-  <a class="blog-item" id="blog2" href="#">
+  <a class="blog-item" id="blog2" href="blog/voc-classification.html">
     <div class="blog-title">Our customer insights were indefensible at the director level</div>
     <div class="blog-meta">
       <div class="blog-date">Jun 2026</div>
       <span class="blog-arrow">&rarr;</span>
     </div>
   </a>
-  <a class="blog-item" id="blog3" href="#">
+  <div class="blog-note" id="blog3">
+    <div class="blog-note-text">A PM partner replied to my latest VOC flash: "Thanks for bringing the VOC newsletter to a new level." The best part? The headline I almost reported turned out to be sample noise. Killing your own finding when the data doesn't hold is how you earn that trust.</div>
+    <div class="blog-note-date">Jun 2026</div>
+  </div>
+  <a class="blog-item" id="blog4" href="blog/llm-as-judge.html">
     <div class="blog-title">How I turned an AI system leadership couldn't trust into one they stopped rewriting</div>
     <div class="blog-meta">
       <div class="blog-date">Jul 2026</div>
       <span class="blog-arrow">&rarr;</span>
     </div>
   </a>
+  <div class="blog-all">
+    <a href="blog.html" class="blog-all-link">All posts &rarr;</a>
+  </div>
 </div>
 
 <div class="footer">
@@ -387,12 +382,12 @@ var revealItems = [
   { el: 'workLabel', offset: 0 },
   { el: 'card1', offset: 0 },
   { el: 'card2', offset: 80 },
-  { el: 'card3', offset: 0 },
-  { el: 'card4', offset: 80 },
   { el: 'blogLabel', offset: 0 },
-  { el: 'blog1', offset: 0 },
-  { el: 'blog2', offset: 100 },
-  { el: 'blog3', offset: 200 }
+  { el: 'blog0', offset: 0 },
+  { el: 'blog1', offset: 80 },
+  { el: 'blog2', offset: 160 },
+  { el: 'blog3', offset: 240 },
+  { el: 'blog4', offset: 320 }
 ];
 
 function checkReveal() {
