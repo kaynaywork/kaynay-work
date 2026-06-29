@@ -6,6 +6,7 @@
 <title>Kene Ezeoke · Builder, Operator, Program Leader</title>
 <meta name="description" content="I solve decision-quality problems at scale. 8+ years across Amazon, Apple, Google, F5, and a NYC startup. Chicago Booth MBA.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -170,15 +171,28 @@ body {
   max-width: 800px; margin: 0 auto 2.5rem; padding: 0 2rem;
 }
 .blog-note {
-  padding: 1rem 0; border-bottom: 1px solid var(--border-light);
+  background: #ece6dd; border-radius: 8px;
+  padding: 1rem 1.2rem; margin-bottom: 0.6rem;
+  position: relative;
   opacity: 0; transform: translateY(12px);
 }
 .blog-note.visible { opacity: 1; transform: translateY(0); }
 .blog-note-text {
   font-size: 13px; color: var(--text-mid); line-height: 1.7;
+  padding-right: 1.5rem;
+}
+.blog-note-img {
+  margin-top: 0.6rem; border-radius: 6px; overflow: hidden;
+}
+.blog-note-img img {
+  width: 100%; display: block; border-radius: 6px;
 }
 .blog-note-date {
   font-size: 10px; color: var(--text-muted); margin-top: 0.5rem;
+}
+.blog-note-icon {
+  position: absolute; bottom: 1rem; right: 1.2rem;
+  font-size: 16px; color: #c4b5a2;
 }
 .blog-item {
   display: flex; justify-content: space-between; align-items: baseline;
@@ -357,6 +371,7 @@ items.forEach(function(item, i) {
     html += '<div class="blog-note-text">' + item.text + '</div>';
     if (item.image) html += '<div class="blog-note-img"><img src="' + item.image + '" alt=""></div>';
     html += '<div class="blog-note-date">' + item.date + '</div>';
+    html += '<i class="ti ti-bolt blog-note-icon" aria-hidden="true"></i>';
     html += '</div>';
   } else {
     html += '<a class="blog-item" id="' + id + '" href="' + item.url + '">';
