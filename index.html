@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kene Ezeoke — Builder, Operator, Program Leader</title>
+<title>Kene Ezeoke · Builder, Operator, Program Leader</title>
 <meta name="description" content="I solve decision-quality problems at scale. 8+ years across Amazon, Apple, Google, F5, and a NYC startup. Chicago Booth MBA.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
-<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -316,46 +315,14 @@ body {
 </div>
 
 <div class="section-label" id="blogLabel">From the blog</div>
-<div class="blog-section">
-  <div class="blog-note" id="blog0">
-    <div class="blog-note-text">Another Prime Day in the books. First one live for the product I own metrics on. Built an in-event projection to give leadership a grounded read instead of gut feel. Flagged my own upper-bound risk up front, then walked it down when actuals came in. That's the job.</div>
-    <div class="blog-note-date">Jun 2026</div>
-  </div>
-  <a class="blog-item" id="blog1" href="blog/forecasting-model.html">
-    <div class="blog-title">Leadership was wasting hours debating whether KPI movements mattered</div>
-    <div class="blog-meta">
-      <div class="blog-date">Jun 2026</div>
-      <span class="blog-arrow">&rarr;</span>
-    </div>
-  </a>
-  <a class="blog-item" id="blog2" href="blog/voc-classification.html">
-    <div class="blog-title">Our customer insights were indefensible at the director level</div>
-    <div class="blog-meta">
-      <div class="blog-date">Jun 2026</div>
-      <span class="blog-arrow">&rarr;</span>
-    </div>
-  </a>
-  <div class="blog-note" id="blog3">
-    <div class="blog-note-text">A PM partner replied to my latest VOC flash: "Thanks for bringing the VOC newsletter to a new level." The best part? The headline I almost reported turned out to be sample noise. Killing your own finding when the data doesn't hold is how you earn that trust.</div>
-    <div class="blog-note-date">Jun 2026</div>
-  </div>
-  <a class="blog-item" id="blog4" href="blog/llm-as-judge.html">
-    <div class="blog-title">How I turned an AI system leadership couldn't trust into one they stopped rewriting</div>
-    <div class="blog-meta">
-      <div class="blog-date">Jul 2026</div>
-      <span class="blog-arrow">&rarr;</span>
-    </div>
-  </a>
-  <div class="blog-all">
-    <a href="blog.html" class="blog-all-link">All posts &rarr;</a>
-  </div>
-</div>
+<div class="blog-section" id="blogFeed"></div>
 
 <div class="footer">
   <div class="footer-text">kene.work &middot; &copy; 2026</div>
   <a href="about.html#contact" class="footer-cta">Get in touch &rarr;</a>
 </div>
 
+<script src="blog-data.js"></script>
 <script>
 // Nav scroll border
 var nav = document.getElementById('nav');
@@ -378,18 +345,40 @@ setTimeout(function() {
   }, 400);
 }, 200);
 
-// Scroll reveal
+// Render blog feed from shared data (show latest 5)
+var feedEl = document.getElementById('blogFeed');
+var maxItems = 5;
+var items = blogData.slice(0, maxItems);
+var html = '';
+items.forEach(function(item, i) {
+  var id = 'blogItem' + i;
+  if (item.type === 'note') {
+    html += '<div class="blog-note" id="' + id + '">';
+    html += '<div class="blog-note-text">' + item.text + '</div>';
+    if (item.image) html += '<div class="blog-note-img"><img src="' + item.image + '" alt=""></div>';
+    html += '<div class="blog-note-date">' + item.date + '</div>';
+    html += '</div>';
+  } else {
+    html += '<a class="blog-item" id="' + id + '" href="' + item.url + '">';
+    html += '<div class="blog-title">' + item.title + '</div>';
+    html += '<div class="blog-meta"><div class="blog-date">' + item.date + '</div>';
+    html += '<span class="blog-arrow">&rarr;</span></div>';
+    html += '</a>';
+  }
+});
+html += '<div class="blog-all"><a href="blog.html" class="blog-all-link">All posts &rarr;</a></div>';
+feedEl.innerHTML = html;
+
+// Scroll reveal (static + dynamic elements)
 var revealItems = [
   { el: 'workLabel', offset: 0 },
   { el: 'card1', offset: 0 },
   { el: 'card2', offset: 80 },
-  { el: 'blogLabel', offset: 0 },
-  { el: 'blog0', offset: 0 },
-  { el: 'blog1', offset: 80 },
-  { el: 'blog2', offset: 160 },
-  { el: 'blog3', offset: 240 },
-  { el: 'blog4', offset: 320 }
+  { el: 'blogLabel', offset: 0 }
 ];
+items.forEach(function(item, i) {
+  revealItems.push({ el: 'blogItem' + i, offset: i * 80 });
+});
 
 function checkReveal() {
   var wh = window.innerHeight;

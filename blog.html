@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog — Kene Ezeoke</title>
+<title>Blog · Kene Ezeoke</title>
 <meta name="description" content="Notes on building systems, decision quality, and operating in ambiguity.">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -11,7 +11,6 @@
 :root { --bg: #f6f1eb; --bg-card: #faf8f4; --text: #1c1814; --text-mid: #4a4238; --text-sec: #6b6058; --text-muted: #8a7e6a; --accent: #b5502a; --accent-hover: #8b3a18; --border: #ddd5c5; --border-light: #ece6dd; }
 html { scroll-behavior: smooth; }
 body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; -webkit-font-smoothing: antialiased; }
-
 .nav { position: sticky; top: 0; z-index: 100; background: rgba(246,241,235,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; transition: border-color 0.3s; }
 .nav.scrolled { border-bottom-color: var(--border); }
 .nav-name { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 500; color: var(--text); text-decoration: none; }
@@ -20,14 +19,10 @@ body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text
 .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s cubic-bezier(0.25,0.46,0.45,0.94); }
 .nav-links a:hover { color: var(--text); } .nav-links a:hover::after { width: 100%; }
 .nav-links a.active { color: var(--accent); } .nav-links a.active::after { width: 100%; }
-
 .page-header { padding: 4rem 2rem 0.5rem; max-width: 680px; margin: 0 auto; }
 .page-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 2.5rem); color: var(--text); line-height: 1.2; }
 .page-desc { font-size: 13px; color: var(--text-muted); margin-top: 0.5rem; }
-
 .blog-feed { max-width: 680px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
-
-/* LONG POST ENTRY */
 .post-entry { padding: 1.5rem 0; border-bottom: 1px solid var(--border-light); }
 .post-entry:first-child { padding-top: 0; }
 .post-entry-date { font-size: 11px; color: var(--text-muted); margin-bottom: 0.4rem; }
@@ -39,18 +34,14 @@ body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text
 .post-entry-cta:hover { color: var(--accent-hover); }
 .post-entry-cta span { display: inline-block; transition: transform 0.2s; }
 .post-entry-cta:hover span { transform: translateX(3px); }
-
-/* SHORT NOTE */
 .note-entry { padding: 1.2rem 0; border-bottom: 1px solid var(--border-light); }
 .note-entry-text { font-size: 13px; color: var(--text-mid); line-height: 1.75; }
 .note-entry-img { margin-top: 0.8rem; border-radius: 6px; overflow: hidden; }
 .note-entry-img img { width: 100%; display: block; border-radius: 6px; }
 .note-entry-date { font-size: 10px; color: var(--text-muted); margin-top: 0.6rem; }
-
 .footer { padding: 1.5rem 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; max-width: 680px; margin: 0 auto; }
 .footer-text { font-size: 11px; color: var(--text-muted); }
 .footer-cta { font-size: 12px; color: var(--accent); text-decoration: none; }
-
 @media (max-width: 640px) {
   .nav { padding: 0 1.2rem; } .nav-links { gap: 1rem; } .nav-links a { font-size: 11px; }
   .page-header { padding: 2.5rem 1.2rem 0.5rem; } .blog-feed { padding: 1.5rem 1.2rem 3rem; }
@@ -59,7 +50,6 @@ body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text
 </style>
 </head>
 <body>
-
 <nav class="nav" id="nav">
   <a href="index.html" class="nav-name">Kene Ezeoke</a>
   <ul class="nav-links">
@@ -69,67 +59,38 @@ body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--text
     <li><a href="about.html#contact">Contact</a></li>
   </ul>
 </nav>
-
 <div class="page-header">
   <div class="page-title">Blog</div>
   <div class="page-desc">Notes on building systems, decision quality, and operating in ambiguity.</div>
 </div>
-
-<div class="blog-feed">
-
-  <!-- SHORT NOTE -->
-  <div class="note-entry">
-    <div class="note-entry-text">Another Prime Day in the books. First one live for the team! Day 1, built an in-event projection to give leadership a grounded read instead of gut feel for performance. Flagged my own upper-bound risk up front. Day 2, then walked it down when a second day of actuals came in, ended up 3bps off actuals for the week. That's the job.</div>
-    <div class="note-entry-date">June 26, 2026</div>
-  </div>
-
-  <!-- LONG POST -->
-  <div class="post-entry">
-    <div class="post-entry-date">June 2026</div>
-    <div class="post-entry-title"><a href="blog/forecasting-model.html">Leadership was spending hours debating whether KPI movements mattered. I built a model to answer the question.</a></div>
-    <div class="post-entry-desc">Every week, leadership reviewed business metrics and spent time debating whether a movement was a real signal or just noise. The problem wasn't technical but, it was a decision-quality gap that happened to have a technical solution.</div>
-    <a href="blog/forecasting-model.html" class="post-entry-cta">Read post <span>&rarr;</span></a>
-  </div>
-
-  <!-- SHORT NOTE -->
-  <div class="note-entry">
-    <div class="note-entry-text">A product lead replied to my latest customer insights report: "Thanks for bringing voice of the customer to a new level." The best part? The headline I almost reported turned out to be sample noise but I caught an issue and fixed it. Killing your own finding when the data doesn't hold is how you earn that trust.</div>
-    <div class="note-entry-date">June 20, 2026</div>
-  </div>
-
-  <!-- LONG POST -->
-  <div class="post-entry">
-    <div class="post-entry-date">June 2026</div>
-    <div class="post-entry-title"><a href="blog/voc-classification.html">Our customer insights program was almost DOA because it couldn't scale. Here's how I fixed that.</a></div>
-    <div class="post-entry-desc">Leadership wanted to know what customers were experiencing but not at the expense of efficiency and scale and limited accuracy. The same dataset produced wildly different results depending on how you tuned the keywords.</div>
-    <a href="blog/voc-classification.html" class="post-entry-cta">Read post <span>&rarr;</span></a>
-  </div>
-
-  <!-- SHORT NOTE — example with an image placeholder -->
-  <!-- <div class="note-entry">
-    <div class="note-entry-text">Your one-liner here.</div>
-    <div class="note-entry-img"><img src="your-image.gif" alt="Description"></div>
-    <div class="note-entry-date">June 15, 2026</div>
-  </div> -->
-
-  <!-- LONG POST -->
-  <div class="post-entry">
-    <div class="post-entry-date">July 2026</div>
-    <div class="post-entry-title"><a href="blog/llm-as-judge.html">How I turned an AI system leadership couldn't trust into one they stopped rewriting</a></div>
-    <div class="post-entry-desc">Week one, leadership threw out the AI draft and rewrote it from scratch. The question wasn't "can AI write a brief?" — it was "how do you systematically close the gap between what AI produces and what a VP will actually read?"</div>
-    <a href="blog/llm-as-judge.html" class="post-entry-cta">Read post <span>&rarr;</span></a>
-  </div>
-
-</div>
-
+<div class="blog-feed" id="blogFeed"></div>
 <div class="footer">
   <div class="footer-text">kene.work &middot; &copy; 2026</div>
   <a href="about.html#contact" class="footer-cta">Get in touch &rarr;</a>
 </div>
-
+<script src="blog-data.js"></script>
 <script>
 var nav = document.getElementById('nav');
 window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); });
+var feedEl = document.getElementById('blogFeed');
+var html = '';
+blogData.forEach(function(item) {
+  if (item.type === 'note') {
+    html += '<div class="note-entry">';
+    html += '<div class="note-entry-text">' + item.text + '</div>';
+    if (item.image) html += '<div class="note-entry-img"><img src="' + item.image + '" alt=""></div>';
+    html += '<div class="note-entry-date">' + item.date + '</div>';
+    html += '</div>';
+  } else {
+    html += '<div class="post-entry">';
+    html += '<div class="post-entry-date">' + item.date + '</div>';
+    html += '<div class="post-entry-title"><a href="' + item.url + '">' + item.title + '</a></div>';
+    html += '<div class="post-entry-desc">' + item.desc + '</div>';
+    html += '<a href="' + item.url + '" class="post-entry-cta">Read post <span>&rarr;</span></a>';
+    html += '</div>';
+  }
+});
+feedEl.innerHTML = html;
 </script>
 </body>
 </html>
